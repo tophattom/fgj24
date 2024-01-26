@@ -3,11 +3,10 @@ package;
 import flixel.FlxGame;
 import openfl.display.Sprite;
 
-class Main extends Sprite
-{
+class Main extends Sprite {
 	public function new()
+		addChild(new FlxGame(0, 0, PlayState));
 	{
 		super();
-		addChild(new FlxGame(0, 0, PlayState));
 	}
 }
