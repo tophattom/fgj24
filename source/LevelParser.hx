@@ -1,7 +1,6 @@
 package;
 
 import Block.Dir;
-import haxe.macro.ExprTools.ExprArrayTools;
 import openfl.utils.Assets;
 
 using StringTools;
@@ -15,7 +14,7 @@ class LevelParser {
 		var x = 0;
 		var y = 0;
 		for (line in data.split("\n")) {
-			if (line == "" || line.charAt(0) == "#") {
+			if (line == "" || line.startsWith("#")) {
 				continue;
 			}
 
