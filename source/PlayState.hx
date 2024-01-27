@@ -29,6 +29,7 @@ class PlayState extends FlxState {
 
 	var selectedBlockType:Null<BlockType> = null;
 	var blockToPlace:Null<Block> = null;
+	var backgroundGrid:BackgroundGrid;
 
 	var mouseGridX:Int = 0;
 	var mouseGridY:Int = 0;
@@ -42,6 +43,9 @@ class PlayState extends FlxState {
 		resourceManager = new ResourceManager();
 
 		level = LevelParser.load(AssetPaths.level1__txt, resourceManager);
+
+		backgroundGrid = new BackgroundGrid();
+		add(backgroundGrid);
 
 		add(level);
 		add(resourceManager);
@@ -65,9 +69,11 @@ class PlayState extends FlxState {
 			case Editor:
 				updateEditorMode(elapsed);
 				bgColor = FlxColor.BROWN;
+				backgroundGrid.visible = true;
 			case Operator:
 				updateOperatorMode(elapsed);
 				bgColor = FlxColor.BLACK;
+				backgroundGrid.visible = false;
 		}
 	}
 
