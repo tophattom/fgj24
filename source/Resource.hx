@@ -14,7 +14,7 @@ class Resource extends FlxSprite {
 	public function new(gridX:Int, gridY:Int) {
 		super(Util.getScreenX(gridX), Util.getScreenY(gridY));
 
-		makeGraphic(12, 12, FlxColor.WHITE);
+		loadGraphic(AssetPaths.clown_horn__png, false, 24, 24);
 
 		this.gridX = gridX;
 		this.gridY = gridY;
