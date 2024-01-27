@@ -30,7 +30,7 @@ class SourceBlock extends Block {
 		}
 	}
 
-	function finshAnimationCallback(name:String) {
+	function finishAnimationCallback(name:String) {
 		switch (name) {
 			case "done":
 				animation.play("open");
@@ -58,7 +58,7 @@ class SourceBlock extends Block {
 
 		animation.play("idle");
 
-		animation.finishCallback = finshAnimationCallback;
+		animation.finishCallback = finishAnimationCallback;
 	}
 
 	override public function getRoofSprite() {
