@@ -1,5 +1,6 @@
 package;
 
+import Block.Dir;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -107,7 +108,7 @@ class PlayState extends FlxState {
 		}
 	}
 
-	function selectBlockType(type:Null<BlockType>) {
+	function selectBlockType(type:Null<BlockType>, dir:Dir = North) {
 		selectedBlockType = type;
 		trace('select block type $type');
 
@@ -120,11 +121,11 @@ class PlayState extends FlxState {
 
 		switch (type) {
 			case Belt:
-				blockToPlace = new StraightBlock(mouseGridX, mouseGridY, North);
+				blockToPlace = new StraightBlock(mouseGridX, mouseGridY, dir);
 			case Source:
-				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, North, resourceManager);
+				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, dir, resourceManager);
 			case Sink:
-				blockToPlace = new SinkBlock(mouseGridX, mouseGridY, North, resourceManager);
+				blockToPlace = new SinkBlock(mouseGridX, mouseGridY, dir, resourceManager);
 			case null:
 				blockToPlace = null;
 		}
@@ -149,11 +150,12 @@ class PlayState extends FlxState {
 	}
 
 	function placeSelectedBlock() {
+		var previousDir = blockToPlace.dir;
 		level.add(blockToPlace);
 
 		clearSelectedBlock();
 
 		// Re-select the same block type so that multiples can be placed
-		selectBlockType(selectedBlockType);
+		selectBlockType(selectedBlockType, previousDir);
 	}
 }

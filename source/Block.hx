@@ -10,7 +10,8 @@ enum Dir {
 }
 
 abstract class Block extends FlxSprite {
-	var dir:Dir;
+	public var dir(default, null):Dir;
+
 	var animating:Bool;
 
 	public var gridX(default, set):Int;
