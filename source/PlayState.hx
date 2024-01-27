@@ -133,6 +133,10 @@ class PlayState extends FlxState {
 	}
 
 	function clearSelectedBlock(destroy:Bool = false) {
+		if (blockToPlace == null) {
+			return;
+		}
+
 		remove(blockToPlace, true);
 
 		if (destroy) {
