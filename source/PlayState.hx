@@ -78,6 +78,8 @@ class PlayState extends FlxState {
 
 			if (FlxG.mouse.justPressed) {
 				placeSelectedBlock();
+			} else if (FlxG.mouse.justPressedMiddle || FlxG.keys.justPressed.R) {
+				blockToPlace.rotateCW();
 			}
 		}
 	}
