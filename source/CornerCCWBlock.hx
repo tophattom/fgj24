@@ -35,10 +35,6 @@ class CornerCCWBlock extends Block {
 		}
 	}
 
-	function getRoofSprite() {
-		return null;
-	}
-
 	function startAnimation() {}
 
 	function stopAnimation() {}

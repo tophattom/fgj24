@@ -61,7 +61,7 @@ class SourceBlock extends Block {
 		animation.finishCallback = finshAnimationCallback;
 	}
 
-	function getRoofSprite() {
+	override public function getRoofSprite() {
 		var sprite = new FlxSprite(x, y);
 		sprite.loadGraphic(AssetPaths.source_block_roof__png, false, 24, 24);
 		sprite.angle = this.angle;

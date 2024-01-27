@@ -28,10 +28,6 @@ class SinkBlock extends Block {
 		animation.play("idle");
 	}
 
-	function getRoofSprite() {
-		return null;
-	}
-
 	function setGraphicDir(dir:Dir) {
 		switch (dir) {
 			case North:
