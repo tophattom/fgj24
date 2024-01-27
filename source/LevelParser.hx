@@ -47,15 +47,15 @@ class LevelParser {
 
 		switch (blockType) {
 			case "1": // SourceBlock
-				return new SourceBlock(gridX, gridY, dir, resourceManager);
+				return new SourceBlock(gridX, gridY, dir, resourceManager, true);
 			case "2": // SinkBlock
-				return new SinkBlock(gridX, gridY, dir, resourceManager);
+				return new SinkBlock(gridX, gridY, dir, resourceManager, true);
 			case "3": // StraightBlock
-				return new StraightBlock(gridX, gridY, dir);
+				return new StraightBlock(gridX, gridY, dir, true);
 			case "4": // CornerCWBlock
-				return new CornerCWBlock(gridX, gridY, dir);
+				return new CornerCWBlock(gridX, gridY, dir, true);
 			case "5": // CornerCCWBlock
-				return new CornerCCWBlock(gridX, gridY, dir);
+				return new CornerCCWBlock(gridX, gridY, dir, true);
 			default:
 				throw 'Invalid block type "$blockType" at ($gridX, $gridY)';
 		}

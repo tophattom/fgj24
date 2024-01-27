@@ -7,8 +7,8 @@ class SourceBlock extends Block {
 	var resourceType:Int;
 	var resourceManager:ResourceManager;
 
-	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager) {
-		super(gridX, gridY, dir);
+	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, immutable:Bool = false) {
+		super(gridX, gridY, dir, immutable);
 
 		this.resourceManager = resourceManager;
 	}

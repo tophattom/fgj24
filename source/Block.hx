@@ -10,14 +10,16 @@ enum Dir {
 }
 
 abstract class Block extends FlxSprite {
-	public var dir(default, null):Dir;
-
 	var animating:Bool;
+
+	public var dir(default, null):Dir;
 
 	public var gridX(default, set):Int;
 	public var gridY(default, set):Int;
 
-	public function new(gridX:Int, gridY:Int, dir:Dir) {
+	public var immutable(default, null):Bool;
+
+	public function new(gridX:Int, gridY:Int, dir:Dir, immutable:Bool = false) {
 		super(Util.getScreenX(gridX), Util.getScreenY(gridY));
 
 		this.gridX = gridX;
@@ -25,6 +27,7 @@ abstract class Block extends FlxSprite {
 
 		this.dir = dir;
 		this.animating = false;
+		this.immutable = immutable;
 
 		setGraphic();
 		setGraphicDir(dir);

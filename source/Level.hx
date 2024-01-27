@@ -16,7 +16,7 @@ class Level extends FlxTypedGroup<Block> {
 	public function destroyBlockAt(gridX:Int, gridY:Int) {
 		var blockToDestroy = getBlockAt(gridX, gridY);
 
-		if (blockToDestroy != null) {
+		if (blockToDestroy != null && !blockToDestroy.immutable) {
 			remove(blockToDestroy, true);
 			blockToDestroy.destroy();
 		}
