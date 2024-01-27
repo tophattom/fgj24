@@ -35,6 +35,8 @@ class PlayState extends FlxState {
 	var mouseGridX:Int = 0;
 	var mouseGridY:Int = 0;
 
+	public var levelFilename:String = AssetPaths.empty_level__txt;
+
 	override public function create() {
 		super.create();
 
@@ -43,7 +45,7 @@ class PlayState extends FlxState {
 
 		resourceManager = new ResourceManager();
 
-		level = LevelParser.load(AssetPaths.level1__txt, resourceManager);
+		level = LevelParser.load(levelFilename, resourceManager);
 
 		backgroundGrid = new BackgroundGrid();
 
