@@ -29,6 +29,9 @@ class PlayState extends FlxState {
 
 	var blockCursor:FlxSprite;
 
+	var mouseGridX:Int = 0;
+	var mouseGridY:Int = 0;
+
 	override public function create() {
 		super.create();
 
@@ -47,6 +50,9 @@ class PlayState extends FlxState {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+
+		mouseGridX = Util.getBlockX(FlxG.mouse.screenX);
+		mouseGridY = Util.getBlockY(FlxG.mouse.screenY);
 
 		// FIXME: This is only for development purposes
 		if (FlxG.keys.justPressed.M) {
@@ -82,6 +88,10 @@ class PlayState extends FlxState {
 			} else if (FlxG.mouse.justPressedMiddle || FlxG.keys.justPressed.R) {
 				blockToPlace.rotateCW();
 			}
+		} else {
+			if (FlxG.keys.justPressed.X) {
+				level.destroyBlockAt(mouseGridX, mouseGridY);
+			}
 		}
 	}
 
@@ -111,9 +121,6 @@ class PlayState extends FlxState {
 	function selectBlockType(type:Null<BlockType>, dir:Dir = North) {
 		selectedBlockType = type;
 		trace('select block type $type');
-
-		var mouseGridX = Util.getBlockX(FlxG.mouse.screenX);
-		var mouseGridY = Util.getBlockY(FlxG.mouse.screenY);
 
 		if (blockToPlace != null) {
 			clearSelectedBlock(true);

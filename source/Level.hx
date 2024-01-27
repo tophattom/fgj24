@@ -8,4 +8,17 @@ class Level extends FlxTypedGroup<Block> {
 			block.startAnimation();
 		}
 	}
+
+	public function getBlockAt(gridX:Int, gridY:Int):Null<Block> {
+		return members.filter(b -> b.gridX == gridX && b.gridY == gridY).pop();
+	}
+
+	public function destroyBlockAt(gridX:Int, gridY:Int) {
+		var blockToDestroy = getBlockAt(gridX, gridY);
+
+		if (blockToDestroy != null) {
+			remove(blockToDestroy, true);
+			blockToDestroy.destroy();
+		}
+	}
 }
