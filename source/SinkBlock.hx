@@ -1,16 +1,21 @@
 package;
 
 import Block.Dir;
+import Resource.ResourceType;
 import flixel.util.FlxTimer;
 
 class SinkBlock extends Block {
 	var resourceManager:ResourceManager;
 	var animationTimer:FlxTimer;
 
-	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, immutable:Bool = false) {
+	var requirements:Map<ResourceType, Int>;
+	var resourcesDelivered:Map<ResourceType, Int> = [];
+
+	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, requirements:Map<ResourceType, Int>, immutable:Bool = false) {
 		super(gridX, gridY, dir, immutable);
 
 		this.resourceManager = resourceManager;
+		this.requirements = requirements;
 	}
 
 	override public function destroy() {
@@ -23,9 +28,13 @@ class SinkBlock extends Block {
 		trace("consumed", resources.length, "blocks");
 
 		for (r in resources) {
+			resourcesDelivered[r.type] += 1;
+
 			this.resourceManager.remove(r, true);
 			r.destroy();
 		}
+
+		trace(resourcesDelivered);
 
 		if (resources.length > 0) {
 			animation.play("laugh");
@@ -94,6 +103,11 @@ class SinkBlock extends Block {
 	function stopAnimation() {}
 
 	public function dataStr():String {
-		return '2|${Util.dirToLevelFormat(dir)}';
+		var reqStrParts = [];
+		for (resType => amount in requirements) {
+			reqStrParts.push('${Util.resourceTypeToLevelFormat(resType)}|$amount');
+		}
+
+		return '2|${Util.dirToLevelFormat(dir)}|${reqStrParts.join("|")}';
 	}
 }
