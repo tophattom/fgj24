@@ -24,10 +24,12 @@ class StraightBlock extends Block {
 
 	function startAnimation() {
 		animation.play("active");
+		animating = true;
 	}
 
 	function stopAnimation() {
 		animation.play("idle");
+		animating = false;
 	}
 
 	function setGraphicDir(dir:Dir) {
@@ -44,6 +46,12 @@ class StraightBlock extends Block {
 			case West:
 				animation.add("idle", [12]);
 				animation.add("active", [for (i in 12...24) i], Util.ANIMATION_FPS, true);
+		}
+
+		if (animating) {
+			animation.play("active");
+		} else {
+			animation.play("idle");
 		}
 	}
 }
