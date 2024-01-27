@@ -2,6 +2,7 @@ package;
 
 import Block.Dir;
 import flixel.FlxSprite;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 
 class Resource extends FlxSprite {
@@ -37,14 +38,12 @@ class Resource extends FlxSprite {
 	}
 
 	function setGridX(value:Int):Int {
-		// TODO: Add tweening
-		x = Util.getScreenX(value);
+		FlxTween.tween(this, { x: Util.getScreenX(value) }, Util.TICK_INTERVAL);
 		return gridX = value;
 	}
 
 	function setGridY(value:Int):Int {
-		// TODO: Add tweening
-		y = Util.getScreenY(value);
+		FlxTween.tween(this, { y: Util.getScreenY(value) }, Util.TICK_INTERVAL);
 		return gridY = value;
 	}
 }

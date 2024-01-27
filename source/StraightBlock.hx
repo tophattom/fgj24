@@ -15,9 +15,9 @@ class StraightBlock extends Block {
 	}
 
 	function setGraphic() {
-		loadGraphic(AssetPaths.belt_left__png, true, 24, 24);
+		loadGraphic(AssetPaths.belt__png, true, 24, 24);
 		animation.add("idle", [0]);
-		animation.add("active", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], Util.ANIMATION_FPS, true);
+		animation.add("active", [for (i in 0...12) i], Util.ANIMATION_FPS, true);
 
 		animation.play("idle");
 	}
@@ -33,13 +33,17 @@ class StraightBlock extends Block {
 	function setGraphicDir(dir:Dir) {
 		switch (dir) {
 			case North:
-				this.angle = 90;
+				animation.add("idle", [24]);
+				animation.add("active", [for (i in 24...36) i], Util.ANIMATION_FPS, true);
 			case South:
-				this.angle = 270;
+				animation.add("idle", [36]);
+				animation.add("active", [for (i in 36...48) i], Util.ANIMATION_FPS, true);
 			case East:
-				this.angle = 0;
+				animation.add("idle", [0]);
+				animation.add("active", [for (i in 0...12) i], Util.ANIMATION_FPS, true);
 			case West:
-				this.angle = 180;
+				animation.add("idle", [12]);
+				animation.add("active", [for (i in 12...24) i], Util.ANIMATION_FPS, true);
 		}
 	}
 }
