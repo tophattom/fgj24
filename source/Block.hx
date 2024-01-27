@@ -27,6 +27,7 @@ abstract class Block extends FlxSprite {
 
 		setGraphic();
 		setGraphicDir(dir);
+		startAnimation();
 	}
 
 	public function rotateCW() {
