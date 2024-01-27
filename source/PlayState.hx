@@ -14,7 +14,9 @@ enum Mode {
 enum BlockType {
 	Source;
 	Sink;
-	Belt;
+	Straight;
+	CornerCW;
+	CornerCCW;
 }
 
 class PlayState extends FlxState {
@@ -77,7 +79,11 @@ class PlayState extends FlxState {
 		} else if (FlxG.keys.justPressed.TWO) {
 			selectBlockType(Sink);
 		} else if (FlxG.keys.justPressed.THREE) {
-			selectBlockType(Belt);
+			selectBlockType(Straight);
+		} else if (FlxG.keys.justPressed.FOUR) {
+			selectBlockType(CornerCW);
+		} else if (FlxG.keys.justPressed.FIVE) {
+			selectBlockType(CornerCCW);
 		} else if (FlxG.keys.justPressed.ESCAPE) {
 			selectBlockType(null);
 		}
@@ -130,8 +136,12 @@ class PlayState extends FlxState {
 		}
 
 		switch (type) {
-			case Belt:
+			case Straight:
 				blockToPlace = new StraightBlock(mouseGridX, mouseGridY, dir);
+			case CornerCW:
+				blockToPlace = new CornerCWBlock(mouseGridX, mouseGridY, dir);
+			case CornerCCW:
+				blockToPlace = new CornerCCWBlock(mouseGridX, mouseGridY, dir);
 			case Source:
 				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, dir, resourceManager);
 			case Sink:
