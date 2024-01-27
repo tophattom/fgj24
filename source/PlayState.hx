@@ -99,6 +99,7 @@ class PlayState extends FlxState {
 	function switchMode() {
 		if (mode == Editor) {
 			mode = Operator;
+			clearSelectedBlock(true);
 		} else if (mode == Operator) {
 			mode = Editor;
 		}
