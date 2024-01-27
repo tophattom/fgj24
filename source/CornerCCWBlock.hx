@@ -22,7 +22,18 @@ class CornerCCWBlock extends Block {
 		animation.play("idle");
 	}
 
-	function setGraphicDir(dir:Dir) {}
+	function setGraphicDir(dir:Dir) {
+		switch (dir) {
+			case North:
+				this.angle = 0;
+			case South:
+				this.angle = 180;
+			case East:
+				this.angle = 90;
+			case West:
+				this.angle = 270;
+		}
+	}
 
 	function startAnimation() {}
 

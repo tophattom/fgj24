@@ -30,5 +30,16 @@ class StraightBlock extends Block {
 		animation.play("idle");
 	}
 
-	function setGraphicDir(dir:Dir) {}
+	function setGraphicDir(dir:Dir) {
+		switch (dir) {
+			case North:
+				this.angle = 90;
+			case South:
+				this.angle = 270;
+			case East:
+				this.angle = 0;
+			case West:
+				this.angle = 180;
+		}
+	}
 }
