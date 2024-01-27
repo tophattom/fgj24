@@ -12,15 +12,12 @@ class SourceBlock extends Block {
 	var producingNewResource:Bool;
 
 	var resourceTypePool:Array<ResourceType>;
-	var resourceProbability:Float;
 
-	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, resourceProbability:Float,
-			resourceTypePool:Array<ResourceType>, immutable:Bool = false) {
+	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, resourceTypePool:Array<ResourceType>, immutable:Bool = false) {
 		super(gridX, gridY, dir, immutable);
 
 		this.resourceManager = resourceManager;
 		this.resourceTypePool = resourceTypePool;
-		this.resourceProbability = resourceProbability;
 
 		newResource = null;
 		producingNewResource = false;
@@ -33,7 +30,7 @@ class SourceBlock extends Block {
 			}
 		}
 
-		if (Math.random() <= resourceProbability && !producingNewResource) {
+		if (!producingNewResource && resourceTypePool.length > 0) {
 			produceResource();
 		}
 
@@ -49,11 +46,13 @@ class SourceBlock extends Block {
 				animation.play("open");
 			case "open":
 				newResource = generateNewResource();
-				resourceManager.add(newResource);
+				if (newResource != null) {
+					resourceManager.add(newResource);
 
-				// TODO: Take block direction into account
-				FlxTween.tween(newResource, { x: newResource.x + 8 }, Util.TICK_INTERVAL / 2);
-				animation.play("produce");
+					// TODO: Take block direction into account
+					FlxTween.tween(newResource, { x: newResource.x + 8 }, Util.TICK_INTERVAL / 2);
+					animation.play("produce");
+				}
 			case "produce":
 				animation.play("close");
 			case "close":
@@ -87,14 +86,16 @@ class SourceBlock extends Block {
 		animation.play("done");
 	}
 
-	function generateNewResource():Resource {
-		var resourceType = Util.randomChoice(resourceTypePool);
+	function generateNewResource():Null<Resource> {
+		var resourceType = resourceTypePool.shift();
 
 		return switch (resourceType) {
 			case FartCushion:
 				new FartCushionResource(gridX, gridY);
 			case Horn:
 				new HornResource(gridX, gridY);
+			case null:
+				null;
 		}
 	}
 
@@ -117,6 +118,6 @@ class SourceBlock extends Block {
 
 	public function dataStr():String {
 		var resTypes = resourceTypePool.map(Util.resourceTypeToLevelFormat).join("|");
-		return '1|${Util.dirToLevelFormat(dir)}|$resourceProbability|$resTypes';
+		return '1|${Util.dirToLevelFormat(dir)}|$resTypes';
 	}
 }

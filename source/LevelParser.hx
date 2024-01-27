@@ -48,10 +48,9 @@ class LevelParser {
 
 		switch (blockType) {
 			case "1": // SourceBlock
-				var probability = Std.parseFloat(parts.shift());
 				var typePool = parts.map(parseResourceType);
 
-				return new SourceBlock(gridX, gridY, dir, resourceManager, probability, typePool, true);
+				return new SourceBlock(gridX, gridY, dir, resourceManager, typePool, true);
 			case "2": // SinkBlock
 				return new SinkBlock(gridX, gridY, dir, resourceManager, true);
 			case "3": // StraightBlock
