@@ -11,6 +11,8 @@ enum ResourceType {
 }
 
 abstract class Resource extends FlxSprite {
+	public var type(get, never):ResourceType;
+
 	public var gridX(default, null):Int;
 	public var gridY(default, null):Int;
 
@@ -55,4 +57,6 @@ abstract class Resource extends FlxSprite {
 	}
 
 	abstract function setGraphic():Void;
+
+	abstract function get_type():ResourceType;
 }
