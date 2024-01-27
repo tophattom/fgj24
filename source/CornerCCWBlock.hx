@@ -28,8 +28,9 @@ class CornerCCWBlock extends Block {
 	}
 
 	function setGraphic() {
-		loadGraphic(AssetPaths.belt_corner_ccw__png, true, 24, 24);
-		animation.add("idle", [0]);
+		loadGraphic(AssetPaths.belt__png, true, 24, 24);
+		animation.add("idle", [96]);
+		animation.add("active", [for (i in 96...108) i], Util.ANIMATION_FPS, true);
 
 		animation.play("idle");
 	}
@@ -37,17 +38,33 @@ class CornerCCWBlock extends Block {
 	function setGraphicDir(dir:Dir) {
 		switch (dir) {
 			case North:
-				this.angle = 0;
+				animation.add("idle", [96]);
+				animation.add("active", [for (i in 96...108) i], Util.ANIMATION_FPS, true);
 			case South:
-				this.angle = 180;
+				animation.add("idle", [132]);
+				animation.add("active", [for (i in 132...144) i], Util.ANIMATION_FPS, true);
 			case East:
-				this.angle = 90;
+				animation.add("idle", [84]);
+				animation.add("active", [for (i in 84...96) i], Util.ANIMATION_FPS, true);
 			case West:
-				this.angle = 270;
+				animation.add("idle", [60]);
+				animation.add("active", [for (i in 60...72) i], Util.ANIMATION_FPS, true);
+		}
+
+		if (animating) {
+			animation.play("active");
+		} else {
+			animation.play("idle");
 		}
 	}
 
-	function startAnimation() {}
+	function startAnimation() {
+		animation.play("active");
+		animating = true;
+	}
 
-	function stopAnimation() {}
+	function stopAnimation() {
+		animating = false;
+		animation.play("idle");
+	}
 }
