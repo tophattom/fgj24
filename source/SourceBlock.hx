@@ -49,8 +49,18 @@ class SourceBlock extends Block {
 				if (newResource != null) {
 					resourceManager.add(newResource);
 
-					// TODO: Take block direction into account
-					FlxTween.tween(newResource, { x: newResource.x + 8 }, Util.TICK_INTERVAL / 2);
+					var tweenProps:Dynamic = switch (dir) {
+						case North:
+							{ y: newResource.y - 8 };
+						case South:
+							{ y: newResource.y + 8 };
+						case East:
+							{ x: newResource.x + 8 };
+						case West:
+							{ x: newResource.x - 8 };
+					};
+
+					FlxTween.tween(newResource, tweenProps, Util.TICK_INTERVAL / 2);
 					animation.play("produce");
 				}
 			case "produce":
