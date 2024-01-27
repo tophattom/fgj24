@@ -4,6 +4,7 @@ import Block.Dir;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.util.FlxColor;
 
 enum Mode {
 	Editor;
@@ -62,8 +63,10 @@ class PlayState extends FlxState {
 		switch (mode) {
 			case Editor:
 				updateEditorMode(elapsed);
+				bgColor = FlxColor.BROWN;
 			case Operator:
 				updateOperatorMode(elapsed);
+				bgColor = FlxColor.BLACK;
 		}
 	}
 
