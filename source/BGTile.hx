@@ -25,8 +25,8 @@ class BGTile extends FlxSprite {
 	}
 
 	override public function destroy() {
-		animationTimer.cancel();
-		animationTimer.destroy();
+		animationTimer?.cancel();
+		animationTimer?.destroy();
 		super.destroy();
 	}
 

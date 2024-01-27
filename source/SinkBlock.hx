@@ -14,8 +14,8 @@ class SinkBlock extends Block {
 	}
 
 	override public function destroy() {
-		animationTimer.cancel();
-		animationTimer.destroy();
+		animationTimer?.cancel();
+		animationTimer?.destroy();
 		super.destroy();
 	}
 
