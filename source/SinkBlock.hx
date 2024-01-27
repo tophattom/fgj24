@@ -97,4 +97,8 @@ class SinkBlock extends Block {
 	function startAnimation() {}
 
 	function stopAnimation() {}
+
+	public function dataStr():String {
+		return '2|${Util.dirToLevelFormat(dir)}';
+	}
 }

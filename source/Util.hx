@@ -1,6 +1,7 @@
 package;
 
 import Block.Dir;
+import Resource.ResourceType;
 
 class Util {
 	public static inline var TILE_SIZE = 24;
@@ -78,5 +79,27 @@ class Util {
 
 	public static function randomChoice<T>(arr:Array<T>):T {
 		return arr[randomInt(arr.length)];
+	}
+
+	public static function dirToLevelFormat(dir:Dir):String {
+		return switch (dir) {
+			case North:
+				"n";
+			case East:
+				"e";
+			case South:
+				"s";
+			case West:
+				"w";
+		}
+	}
+
+	public static function resourceTypeToLevelFormat(resourceType:ResourceType):String {
+		return switch (resourceType) {
+			case Horn:
+				"h";
+			case FartCushion:
+				"f";
+		}
 	}
 }

@@ -114,4 +114,9 @@ class SourceBlock extends Block {
 	function startAnimation() {}
 
 	function stopAnimation() {}
+
+	public function dataStr():String {
+		var resTypes = resourceTypePool.map(Util.resourceTypeToLevelFormat).join("|");
+		return '1|${Util.dirToLevelFormat(dir)}|$resourceProbability|$resTypes';
+	}
 }

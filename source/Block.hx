@@ -63,6 +63,8 @@ abstract class Block extends FlxSprite {
 
 	public abstract function stopAnimation():Void;
 
+	public abstract function dataStr():String;
+
 	function set_gridX(value:Int):Int {
 		x = Util.getScreenX(value);
 		return gridX = value;

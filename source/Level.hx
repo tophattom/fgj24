@@ -35,4 +35,17 @@ class Level extends FlxTypedGroup<Block> {
 			blockToDestroy.destroy();
 		}
 	}
+
+	public function printData() {
+		var rows = [for (y in 0...Util.GRID_HEIGHT) y].map(y -> {
+			var row = [for (x in 0...Util.GRID_WIDTH) x].map(x -> {
+				var block = getBlockAt(x, y);
+				return block?.dataStr() ?? "0";
+			}).join(",");
+
+			return row;
+		});
+
+		trace(rows.join("\n"));
+	}
 }

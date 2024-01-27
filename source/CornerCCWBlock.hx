@@ -67,4 +67,8 @@ class CornerCCWBlock extends Block {
 		animating = false;
 		animation.play("idle");
 	}
+
+	public function dataStr():String {
+		return '5|${Util.dirToLevelFormat(dir)}';
+	}
 }

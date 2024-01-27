@@ -79,4 +79,8 @@ class JunctionBlock extends Block {
 	public function startAnimation() {}
 
 	public function stopAnimation() {}
+
+	public function dataStr():String {
+		return '6|${Util.dirToLevelFormat(dir)}';
+	}
 }

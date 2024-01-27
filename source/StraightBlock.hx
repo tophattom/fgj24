@@ -58,4 +58,8 @@ class StraightBlock extends Block {
 			animation.play("idle");
 		}
 	}
+
+	public function dataStr():String {
+		return '3|${Util.dirToLevelFormat(dir)}';
+	}
 }

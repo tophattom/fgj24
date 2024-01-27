@@ -97,6 +97,10 @@ class PlayState extends FlxState {
 			selectBlockType(null);
 		}
 
+		if (FlxG.keys.justPressed.P) {
+			level.printData();
+		}
+
 		if (blockToPlace != null) {
 			blockToPlace.gridX = Util.getBlockX(FlxG.mouse.screenX);
 			blockToPlace.gridY = Util.getBlockY(FlxG.mouse.screenY);
