@@ -30,8 +30,6 @@ class PlayState extends FlxState {
 	var selectedBlockType:Null<BlockType> = null;
 	var blockToPlace:Null<Block> = null;
 
-	var blockCursor:FlxSprite;
-
 	var mouseGridX:Int = 0;
 	var mouseGridY:Int = 0;
 
@@ -132,26 +130,31 @@ class PlayState extends FlxState {
 		selectedBlockType = type;
 		trace('select block type $type');
 
+		var previousDir:Dir = null;
 		if (blockToPlace != null) {
+			previousDir = blockToPlace.dir;
 			clearSelectedBlock(true);
 		}
 
+		var newDir = previousDir ?? dir;
 		switch (type) {
 			case Straight:
-				blockToPlace = new StraightBlock(mouseGridX, mouseGridY, dir);
+				blockToPlace = new StraightBlock(mouseGridX, mouseGridY, newDir);
 			case CornerCW:
-				blockToPlace = new CornerCWBlock(mouseGridX, mouseGridY, dir);
+				blockToPlace = new CornerCWBlock(mouseGridX, mouseGridY, newDir);
 			case CornerCCW:
-				blockToPlace = new CornerCCWBlock(mouseGridX, mouseGridY, dir);
+				blockToPlace = new CornerCCWBlock(mouseGridX, mouseGridY, newDir);
 			case Source:
-				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, dir, resourceManager);
+				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, newDir, resourceManager);
 			case Sink:
-				blockToPlace = new SinkBlock(mouseGridX, mouseGridY, dir, resourceManager);
+				blockToPlace = new SinkBlock(mouseGridX, mouseGridY, newDir, resourceManager);
 			case null:
 				blockToPlace = null;
 		}
 
 		if (blockToPlace != null) {
+			blockToPlace.alpha = 0.7;
+
 			add(blockToPlace);
 		}
 	}
@@ -171,7 +174,15 @@ class PlayState extends FlxState {
 	}
 
 	function placeSelectedBlock() {
+		if (level.getBlockAt(blockToPlace.gridX, blockToPlace.gridY) != null) {
+			return;
+		}
+
 		var previousDir = blockToPlace.dir;
+
+		blockToPlace.alpha = 1.0;
+		blockToPlace.blend = NORMAL;
+
 		level.add(blockToPlace);
 
 		clearSelectedBlock();
