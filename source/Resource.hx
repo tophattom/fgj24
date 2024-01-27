@@ -5,7 +5,12 @@ import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 
-class Resource extends FlxSprite {
+enum ResourceType {
+	Horn;
+	// FartCushion;
+}
+
+abstract class Resource extends FlxSprite {
 	public var gridX(default, null):Int;
 	public var gridY(default, null):Int;
 
@@ -15,7 +20,7 @@ class Resource extends FlxSprite {
 	public function new(gridX:Int, gridY:Int) {
 		super(Util.getScreenX(gridX), Util.getScreenY(gridY));
 
-		loadGraphic(AssetPaths.clown_horn__png, false, 24, 24);
+		setGraphic();
 
 		this.gridX = gridX;
 		this.gridY = gridY;
@@ -48,4 +53,6 @@ class Resource extends FlxSprite {
 		FlxTween.tween(this, { y: Util.getScreenY(value) }, Util.TICK_INTERVAL);
 		return gridY = value;
 	}
+
+	abstract function setGraphic():Void;
 }

@@ -1,6 +1,7 @@
 package;
 
 import Block.Dir;
+import Resource.ResourceType;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 
@@ -10,10 +11,17 @@ class SourceBlock extends Block {
 	var newResource:Resource;
 	var producingNewResource:Bool;
 
-	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, immutable:Bool = false) {
+	var resourceTypePool:Array<ResourceType>;
+	var resourceProbability:Float;
+
+	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, resourceProbability:Float,
+			resourceTypePool:Array<ResourceType>, immutable:Bool = false) {
 		super(gridX, gridY, dir, immutable);
 
 		this.resourceManager = resourceManager;
+		this.resourceTypePool = resourceTypePool;
+		this.resourceProbability = resourceProbability;
+
 		newResource = null;
 		producingNewResource = false;
 	}
@@ -25,7 +33,7 @@ class SourceBlock extends Block {
 			}
 		}
 
-		if (Math.random() >= 0.5 && !producingNewResource) {
+		if (Math.random() <= resourceProbability && !producingNewResource) {
 			produceResource();
 			trace('Produce');
 		}
@@ -41,9 +49,10 @@ class SourceBlock extends Block {
 			case "done":
 				animation.play("open");
 			case "open":
-				newResource = new Resource(gridX, gridY);
+				newResource = generateNewResource();
 				resourceManager.add(newResource);
 
+				// TODO: Take block direction into account
 				FlxTween.tween(newResource, { x: newResource.x + 8 }, Util.TICK_INTERVAL / 2);
 				animation.play("produce");
 			case "produce":
@@ -77,6 +86,15 @@ class SourceBlock extends Block {
 	function produceResource() {
 		producingNewResource = true;
 		animation.play("done");
+	}
+
+	function generateNewResource():Resource {
+		var resourceType = Util.randomChoice(resourceTypePool);
+
+		return switch (resourceType) {
+			case Horn:
+				new HornResource(gridX, gridY);
+		}
 	}
 
 	function setGraphicDir(dir:Dir) {

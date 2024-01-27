@@ -161,7 +161,7 @@ class PlayState extends FlxState {
 			case Junction:
 				blockToPlace = new JunctionBlock(mouseGridX, mouseGridY, newDir);
 			case Source:
-				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, newDir, resourceManager);
+				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, newDir, resourceManager, 0.5, [Horn]);
 			case Sink:
 				blockToPlace = new SinkBlock(mouseGridX, mouseGridY, newDir, resourceManager);
 			case null:

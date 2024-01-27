@@ -1,6 +1,7 @@
 package;
 
 import Block.Dir;
+import Resource.ResourceType;
 import openfl.utils.Assets;
 
 using StringTools;
@@ -36,18 +37,21 @@ class LevelParser {
 
 	static function parseTile(resourceManager:ResourceManager, tile:String, gridX:Int, gridY:Int):Null<Block> {
 		var parts = tile.split("|");
-		var blockType = parts[0];
+		var blockType = parts.shift();
 
 		// Empty tile
 		if (blockType == "0") {
 			return null;
 		}
 
-		var dir = parseDir(parts[1]);
+		var dir = parseDir(parts.shift());
 
 		switch (blockType) {
 			case "1": // SourceBlock
-				return new SourceBlock(gridX, gridY, dir, resourceManager, true);
+				var probability = Std.parseFloat(parts.shift());
+				var typePool = parts.map(parseResourceType);
+
+				return new SourceBlock(gridX, gridY, dir, resourceManager, probability, typePool, true);
 			case "2": // SinkBlock
 				return new SinkBlock(gridX, gridY, dir, resourceManager, true);
 			case "3": // StraightBlock
@@ -73,6 +77,15 @@ class LevelParser {
 				return West;
 			default:
 				throw 'Invalid dir $dirStr';
+		}
+	}
+
+	static function parseResourceType(resTypeStr:String):ResourceType {
+		switch (resTypeStr.toLowerCase()) {
+			case "h":
+				return Horn;
+			default:
+				throw 'Invalid resource type $resTypeStr';
 		}
 	}
 }

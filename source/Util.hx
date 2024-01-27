@@ -70,4 +70,13 @@ class Util {
 	public static function oppositeDir(dir:Dir):Dir {
 		return nextDirCW(nextDirCW(dir));
 	}
+
+	// Random integer between 0 (inclusive) and max (exclusive)
+	public static function randomInt(max:Int):Int {
+		return Math.floor(max * Math.random());
+	}
+
+	public static function randomChoice<T>(arr:Array<T>):T {
+		return arr[randomInt(arr.length)];
+	}
 }
