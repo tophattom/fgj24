@@ -60,6 +60,8 @@ class LevelParser {
 				return new CornerCWBlock(gridX, gridY, dir, true);
 			case "5": // CornerCCWBlock
 				return new CornerCCWBlock(gridX, gridY, dir, true);
+			case "6":
+				return new JunctionBlock(gridX, gridY, dir, true);
 			default:
 				throw 'Invalid block type "$blockType" at ($gridX, $gridY)';
 		}
