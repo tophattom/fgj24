@@ -40,10 +40,14 @@ class JunctionBlock extends Block {
 		switch (switchPosition) {
 			case CW:
 				switchPosition = CCW;
-				animation.play("ccw");
 			case CCW:
 				switchPosition = CW;
-				animation.play("cw");
+		}
+
+		if (animating) {
+			animation.play(animationName("active"));
+		} else {
+			animation.play(animationName("idle"));
 		}
 	}
 
@@ -56,29 +60,61 @@ class JunctionBlock extends Block {
 	}
 
 	function setGraphic() {
-		loadGraphic(AssetPaths.junction__png, true, 24, 24);
+		loadGraphic(AssetPaths.belt__png, true, 24, 24);
 
-		animation.add("cw", [1]);
-		animation.add("ccw", [0]);
-		animation.play("cw");
+		animation.add("idle_ccw", [144]);
+		animation.add("idle_cw", [156]);
+
+		animation.play("idle_cw");
 	}
 
 	function setGraphicDir(dir:Dir) {
 		switch (dir) {
 			case North:
-				this.angle = 0;
+				animation.add("idle_ccw", [204]);
+				animation.add("idle_cw", [192]);
+				animation.add("active_ccw", [for (i in 204...216) i], Util.ANIMATION_FPS, true);
+				animation.add("active_cw", [for (i in 192...204) i], Util.ANIMATION_FPS, true);
+
 			case South:
-				this.angle = 180;
+				animation.add("idle_ccw", [144]);
+				animation.add("idle_cw", [156]);
+				animation.add("active_ccw", [for (i in 144...156) i], Util.ANIMATION_FPS, true);
+				animation.add("active_cw", [for (i in 156...168) i], Util.ANIMATION_FPS, true);
+
 			case East:
-				this.angle = 90;
+				animation.add("idle_ccw", [216]);
+				animation.add("idle_cw", [228]);
+				animation.add("active_ccw", [for (i in 216...228) i], Util.ANIMATION_FPS, true);
+				animation.add("active_cw", [for (i in 228...240) i], Util.ANIMATION_FPS, true);
+
 			case West:
-				this.angle = 270;
+				animation.add("idle_ccw", [168]);
+				animation.add("idle_cw", [180]);
+				animation.add("active_ccw", [for (i in 168...180) i], Util.ANIMATION_FPS, true);
+				animation.add("active_cw", [for (i in 180...192) i], Util.ANIMATION_FPS, true);
+		}
+
+		if (animating) {
+			animation.play(animationName("active"));
+		} else {
+			animation.play(animationName("idle"));
 		}
 	}
 
-	public function startAnimation() {}
+	function animationName(state:String) {
+		return switchPosition == CW ? '${state}_cw' : '${state}_ccw';
+	}
 
-	public function stopAnimation() {}
+	public function startAnimation() {
+		animation.play(animationName("active"));
+		animating = true;
+	}
+
+	public function stopAnimation() {
+		animation.play(animationName("idle"));
+		animating = false;
+	}
 
 	public function dataStr():String {
 		return '6|${Util.dirToLevelFormat(dir)}';
