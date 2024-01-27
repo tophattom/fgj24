@@ -17,6 +17,7 @@ enum BlockType {
 	Straight;
 	CornerCW;
 	CornerCCW;
+	Junction;
 }
 
 class PlayState extends FlxState {
@@ -90,6 +91,8 @@ class PlayState extends FlxState {
 			selectBlockType(CornerCW);
 		} else if (FlxG.keys.justPressed.FIVE) {
 			selectBlockType(CornerCCW);
+		} else if (FlxG.keys.justPressed.SIX) {
+			selectBlockType(Junction);
 		} else if (FlxG.keys.justPressed.ESCAPE) {
 			selectBlockType(null);
 		}
@@ -122,6 +125,10 @@ class PlayState extends FlxState {
 				b.tick(resourceManager.getResourcesAt(b.gridX, b.gridY));
 			}
 		}
+
+		if (FlxG.mouse.justPressed) {
+			level.getBlockAt(mouseGridX, mouseGridY)?.onClick();
+		}
 	}
 
 	function switchMode() {
@@ -151,6 +158,8 @@ class PlayState extends FlxState {
 				blockToPlace = new CornerCWBlock(mouseGridX, mouseGridY, newDir);
 			case CornerCCW:
 				blockToPlace = new CornerCCWBlock(mouseGridX, mouseGridY, newDir);
+			case Junction:
+				blockToPlace = new JunctionBlock(mouseGridX, mouseGridY, newDir);
 			case Source:
 				blockToPlace = new SourceBlock(mouseGridX, mouseGridY, newDir, resourceManager);
 			case Sink:

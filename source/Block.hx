@@ -47,6 +47,8 @@ abstract class Block extends FlxSprite {
 		setGraphicDir(dir);
 	}
 
+	public function onClick():Void {};
+
 	abstract public function tick(resources:Array<Resource>):Void;
 
 	abstract function setGraphic():Void;
