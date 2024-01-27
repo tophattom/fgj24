@@ -1,8 +1,22 @@
 package;
 
+import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Level extends FlxTypedGroup<Block> {
+	public function getRoofLayer():FlxTypedGroup<FlxSprite> {
+		var roofLayer = new FlxTypedGroup<FlxSprite>();
+
+		for (block in members) {
+			var sprite = block.getRoofSprite();
+			if (sprite != null) {
+				roofLayer.add(sprite);
+			}
+		}
+
+		return roofLayer;
+	}
+
 	public function playAnimations():Void {
 		for (block in members) {
 			block.startAnimation();

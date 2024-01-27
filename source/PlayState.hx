@@ -47,6 +47,7 @@ class PlayState extends FlxState {
 
 		add(level);
 		add(resourceManager);
+		add(level.getRoofLayer());
 
 		level.playAnimations();
 	}

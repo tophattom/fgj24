@@ -1,6 +1,7 @@
 package;
 
 import Block.Dir;
+import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
 
 class SourceBlock extends Block {
@@ -58,6 +59,13 @@ class SourceBlock extends Block {
 		animation.play("idle");
 
 		animation.finishCallback = finshAnimationCallback;
+	}
+
+	function getRoofSprite() {
+		var sprite = new FlxSprite(x, y);
+		sprite.loadGraphic(AssetPaths.source_block_roof__png, false, 24, 24);
+		sprite.angle = this.angle;
+		return sprite;
 	}
 
 	function produceResource() {

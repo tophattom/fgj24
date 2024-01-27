@@ -53,6 +53,8 @@ abstract class Block extends FlxSprite {
 
 	abstract function setGraphicDir(dir:Dir):Void;
 
+	public abstract function getRoofSprite():Null<FlxSprite>;
+
 	public abstract function startAnimation():Void;
 
 	public abstract function stopAnimation():Void;

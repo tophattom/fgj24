@@ -22,6 +22,10 @@ class StraightBlock extends Block {
 		animation.play("idle");
 	}
 
+	function getRoofSprite() {
+		return null;
+	}
+
 	function startAnimation() {
 		animation.play("active");
 		animating = true;
