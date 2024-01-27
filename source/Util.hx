@@ -56,4 +56,18 @@ class Util {
 				return South;
 		}
 	}
+
+	public static function isPerpendicular(d1:Dir, d2:Dir):Bool {
+		if ((d1 == North || d1 == South) && (d2 == East || d2 == West)) {
+			return true;
+		} else if ((d1 == East || d1 == West) && (d2 == North || d2 == South)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static function oppositeDir(dir:Dir):Dir {
+		return nextDirCW(nextDirCW(dir));
+	}
 }

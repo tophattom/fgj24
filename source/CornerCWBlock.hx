@@ -11,8 +11,20 @@ class CornerCWBlock extends Block {
 
 		var nextDir = Util.nextDirCW(dir);
 		for (r in resources) {
+			if (resourceCrashed(r, nextDir)) {
+				trace('resource crashed into a ccw block at ($gridX, $gridY)');
+			}
+
 			r.move(nextDir);
 		}
+	}
+
+	function resourceCrashed(res:Resource, nextDir:Dir):Bool {
+		if (res.lastMoveDir == dir || res.lastMoveDir == Util.oppositeDir(nextDir)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	function setGraphic() {

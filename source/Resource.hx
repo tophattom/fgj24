@@ -10,6 +10,7 @@ class Resource extends FlxSprite {
 	public var gridY(default, null):Int;
 
 	public var hasMoved:Bool;
+	public var lastMoveDir(default, null):Null<Dir> = null;
 
 	public function new(gridX:Int, gridY:Int) {
 		super(Util.getScreenX(gridX), Util.getScreenY(gridY));
@@ -35,6 +36,7 @@ class Resource extends FlxSprite {
 		}
 
 		hasMoved = true;
+		lastMoveDir = dir;
 	}
 
 	function setGridX(value:Int):Int {

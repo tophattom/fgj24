@@ -15,7 +15,12 @@ class SinkBlock extends Block {
 	public function tick(resources:Array<Resource>) {
 		trace("consumed", resources.length, "blocks");
 
+		var inputDir = Util.oppositeDir(dir);
 		for (r in resources) {
+			if (r.lastMoveDir != inputDir) {
+				trace('resource crashed into a sink block at ($gridX, $gridY)');
+			}
+
 			this.resourceManager.remove(r, true);
 			r.destroy();
 		}

@@ -6,10 +6,14 @@ import flixel.util.FlxColor;
 class StraightBlock extends Block {
 	public function tick(resources:Array<Resource>) {
 		if (resources.length > 1) {
-			trace("Game over");
+			trace('Too many resources on a straight block at ($gridX, $gridY)');
 		}
 
 		for (r in resources) {
+			if (Util.isPerpendicular(dir, r.lastMoveDir)) {
+				trace('resource crashed at ($gridX, $gridY)');
+			}
+
 			r.move(dir);
 		}
 	}

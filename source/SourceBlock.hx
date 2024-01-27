@@ -19,6 +19,12 @@ class SourceBlock extends Block {
 	}
 
 	public function tick(resources:Array<Resource>) {
+		for (r in resources) {
+			if (r.lastMoveDir != null) {
+				trace('cannot pass resources into a source block at ($gridX, $gridY)');
+			}
+		}
+
 		if (Math.random() >= 0.5 && !producingNewResource) {
 			produceResource();
 			trace('Produce');
