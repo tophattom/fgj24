@@ -17,6 +17,7 @@ class SinkBlock extends Block {
 
 		for (r in resources) {
 			this.resourceManager.remove(r, true);
+			r.destroy();
 		}
 	}
 
