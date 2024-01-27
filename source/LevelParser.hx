@@ -84,6 +84,8 @@ class LevelParser {
 		switch (resTypeStr.toLowerCase()) {
 			case "h":
 				return Horn;
+			case "f":
+				return FartCushion;
 			default:
 				throw 'Invalid resource type $resTypeStr';
 		}

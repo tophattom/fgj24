@@ -92,6 +92,8 @@ class SourceBlock extends Block {
 		var resourceType = Util.randomChoice(resourceTypePool);
 
 		return switch (resourceType) {
+			case FartCushion:
+				new FartCushionResource(gridX, gridY);
 			case Horn:
 				new HornResource(gridX, gridY);
 		}
