@@ -15,7 +15,19 @@ class StraightBlock extends Block {
 	}
 
 	function setGraphic() {
-		makeGraphic(Util.TILE_SIZE, Util.TILE_SIZE, FlxColor.GRAY);
+		loadGraphic(AssetPaths.belt_left__png, true, 24, 24);
+		animation.add("idle", [0]);
+		animation.add("active", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], Util.ANIMATION_FPS, true);
+
+		animation.play("idle");
+	}
+
+	function startAnimation() {
+		animation.play("active");
+	}
+
+	function stopAnimation() {
+		animation.play("idle");
 	}
 
 	function setGraphicDir(dir:Dir) {}

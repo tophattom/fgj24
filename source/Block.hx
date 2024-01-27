@@ -11,6 +11,7 @@ enum Dir {
 
 abstract class Block extends FlxSprite {
 	var dir:Dir;
+	var animating:Bool;
 
 	public var gridX:Int;
 	public var gridY:Int;
@@ -22,6 +23,7 @@ abstract class Block extends FlxSprite {
 		this.gridY = gridY;
 
 		this.dir = dir;
+		this.animating = false;
 
 		setGraphic();
 	}
@@ -44,4 +46,8 @@ abstract class Block extends FlxSprite {
 	abstract function setGraphic():Void;
 
 	abstract function setGraphicDir(dir:Dir):Void;
+
+	public abstract function startAnimation():Void;
+
+	public abstract function stopAnimation():Void;
 }

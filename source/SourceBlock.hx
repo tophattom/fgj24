@@ -23,8 +23,15 @@ class SourceBlock extends Block {
 	}
 
 	function setGraphic() {
-		makeGraphic(Util.TILE_SIZE, Util.TILE_SIZE, FlxColor.GREEN);
+		loadGraphic(AssetPaths.source_block__png, true, 24, 24);
+		animation.add("idle", [0]);
+
+		animation.play("idle");
 	}
 
 	function setGraphicDir(dir:Dir) {}
+
+	function startAnimation() {}
+
+	function stopAnimation() {}
 }

@@ -4,6 +4,7 @@ import Block.Dir;
 
 class Util {
 	public static inline var TILE_SIZE = 24;
+	public static inline var ANIMATION_FPS = 10;
 
 	public static inline var GRID_WIDTH = 12;
 	public static inline var GRID_HEIGHT = 12;

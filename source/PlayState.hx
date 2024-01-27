@@ -20,6 +20,8 @@ class PlayState extends FlxState {
 
 		add(level);
 		add(resourceManager);
+
+		level.playAnimations();
 	}
 
 	override public function update(elapsed:Float) {
