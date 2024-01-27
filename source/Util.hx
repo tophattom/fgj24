@@ -22,6 +22,14 @@ class Util {
 		return GRID_OFFSET_Y + gridY * TILE_SIZE;
 	}
 
+	public static function getBlockX(screenX:Int) {
+		return Math.floor((screenX - GRID_OFFSET_X) / TILE_SIZE);
+	}
+
+	public static function getBlockY(screenY:Int) {
+		return Math.floor((screenY - GRID_OFFSET_Y) / TILE_SIZE);
+	}
+
 	public static function nextDirCW(dir:Dir) {
 		switch (dir) {
 			case North:

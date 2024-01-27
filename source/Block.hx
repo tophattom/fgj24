@@ -13,8 +13,8 @@ abstract class Block extends FlxSprite {
 	var dir:Dir;
 	var animating:Bool;
 
-	public var gridX:Int;
-	public var gridY:Int;
+	public var gridX(default, set):Int;
+	public var gridY(default, set):Int;
 
 	public function new(gridX:Int, gridY:Int, dir:Dir) {
 		super(Util.getScreenX(gridX), Util.getScreenY(gridY));
@@ -51,4 +51,14 @@ abstract class Block extends FlxSprite {
 	public abstract function startAnimation():Void;
 
 	public abstract function stopAnimation():Void;
+
+	function set_gridX(value:Int):Int {
+		x = Util.getScreenX(value);
+		return gridX = value;
+	}
+
+	function set_gridY(value:Int):Int {
+		y = Util.getScreenY(value);
+		return gridY = value;
+	}
 }
