@@ -45,8 +45,9 @@ class PlayState extends FlxState {
 		level = LevelParser.load(AssetPaths.level1__txt, resourceManager);
 
 		backgroundGrid = new BackgroundGrid();
-		add(backgroundGrid);
 
+		add(new BG());
+		add(backgroundGrid);
 		add(level);
 		add(resourceManager);
 		add(level.getRoofLayer());
