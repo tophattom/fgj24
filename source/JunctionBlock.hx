@@ -40,8 +40,10 @@ class JunctionBlock extends Block {
 		switch (switchPosition) {
 			case CW:
 				switchPosition = CCW;
+				animation.play("ccw");
 			case CCW:
 				switchPosition = CW;
+				animation.play("cw");
 		}
 	}
 
@@ -54,10 +56,25 @@ class JunctionBlock extends Block {
 	}
 
 	function setGraphic() {
-		makeGraphic(Util.TILE_SIZE, Util.TILE_SIZE, FlxColor.LIME);
+		loadGraphic(AssetPaths.junction__png, true, 24, 24);
+
+		animation.add("cw", [1]);
+		animation.add("ccw", [0]);
+		animation.play("cw");
 	}
 
-	function setGraphicDir(dir:Dir) {}
+	function setGraphicDir(dir:Dir) {
+		switch (dir) {
+			case North:
+				this.angle = 0;
+			case South:
+				this.angle = 180;
+			case East:
+				this.angle = 90;
+			case West:
+				this.angle = 270;
+		}
+	}
 
 	public function startAnimation() {}
 
