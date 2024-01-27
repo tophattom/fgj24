@@ -1,5 +1,6 @@
 package;
 
+import Block.Dir;
 import flixel.util.FlxColor;
 
 class CornerCCWBlock extends Block {
@@ -8,21 +9,15 @@ class CornerCCWBlock extends Block {
 			trace("Game over");
 		}
 
+		var nextDir = Util.nextDirCCW(dir);
 		for (r in resources) {
-			switch (dir) {
-				case North:
-					r.move(West);
-				case South:
-					r.move(East);
-				case East:
-					r.move(North);
-				case West:
-					r.move(South);
-			}
+			r.move(nextDir);
 		}
 	}
 
 	function setGraphic() {
 		makeGraphic(Util.TILE_SIZE, Util.TILE_SIZE, FlxColor.PURPLE);
 	}
+
+	function setGraphicDir(dir:Dir) {}
 }

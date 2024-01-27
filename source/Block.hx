@@ -26,7 +26,22 @@ abstract class Block extends FlxSprite {
 		setGraphic();
 	}
 
+	public function rotateCW() {
+		setDir(Util.nextDirCW(dir));
+	}
+
+	public function rotateCCW() {
+		setDir(Util.nextDirCCW(dir));
+	}
+
+	function setDir(dir:Dir) {
+		this.dir = dir;
+		setGraphicDir(dir);
+	}
+
 	abstract public function tick(resources:Array<Resource>):Void;
 
 	abstract function setGraphic():Void;
+
+	abstract function setGraphicDir(dir:Dir):Void;
 }

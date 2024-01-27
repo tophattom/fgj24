@@ -24,4 +24,6 @@ class SinkBlock extends Block {
 	function setGraphic() {
 		makeGraphic(Util.TILE_SIZE, Util.TILE_SIZE, FlxColor.RED);
 	}
+
+	function setGraphicDir(dir:Dir) {}
 }

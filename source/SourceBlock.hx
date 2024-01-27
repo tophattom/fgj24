@@ -25,4 +25,6 @@ class SourceBlock extends Block {
 	function setGraphic() {
 		makeGraphic(Util.TILE_SIZE, Util.TILE_SIZE, FlxColor.GREEN);
 	}
+
+	function setGraphicDir(dir:Dir) {}
 }

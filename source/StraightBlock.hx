@@ -1,5 +1,6 @@
 package;
 
+import Block.Dir;
 import flixel.util.FlxColor;
 
 class StraightBlock extends Block {
@@ -16,4 +17,6 @@ class StraightBlock extends Block {
 	function setGraphic() {
 		makeGraphic(Util.TILE_SIZE, Util.TILE_SIZE, FlxColor.GRAY);
 	}
+
+	function setGraphicDir(dir:Dir) {}
 }
