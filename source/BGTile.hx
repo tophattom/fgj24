@@ -7,6 +7,8 @@ class BGTile extends FlxSprite {
 	public var gridX(default, set):Int;
 	public var gridY(default, set):Int;
 
+	var animationTimer:FlxTimer;
+
 	public function new(gridX:Int, gridY:Int) {
 		super(Util.getScreenX(gridX), Util.getScreenY(gridY));
 
@@ -22,6 +24,12 @@ class BGTile extends FlxSprite {
 		shake();
 	}
 
+	override public function destroy() {
+		animationTimer.cancel();
+		animationTimer.destroy();
+		super.destroy();
+	}
+
 	function finishAnimationCallback(name:String) {
 		if (name == "shake") {
 			shake();
@@ -31,7 +39,7 @@ class BGTile extends FlxSprite {
 	function shake() {
 		var delay = Math.random() * 10;
 
-		new FlxTimer().start(delay, (_) -> {
+		animationTimer = new FlxTimer().start(delay, (_) -> {
 			animation.play("shake");
 		});
 	}

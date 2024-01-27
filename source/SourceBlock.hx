@@ -35,7 +35,6 @@ class SourceBlock extends Block {
 
 		if (Math.random() <= resourceProbability && !producingNewResource) {
 			produceResource();
-			trace('Produce');
 		}
 
 		if (newResource != null) {
