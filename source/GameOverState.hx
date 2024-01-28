@@ -11,9 +11,8 @@ class GameOverState extends FlxSubState {
 	var failCondition:Null<FailCondition>;
 
 	var tryAgainCallback:() -> Void;
-	var toMenuCallback:() -> Void;
 
-	override public function new(win:Bool, failCondition:Null<FailCondition>, tryAgainCallback:() -> Void) {
+	override public function new(win:Bool, failCondition:Null<FailCondition>, tryAgainCallback:Null<() -> Void>) {
 		super(FlxColor.fromRGBFloat(0, 0, 0, 0.5));
 		this.win = win;
 
@@ -33,11 +32,13 @@ class GameOverState extends FlxSubState {
 		var offsetX = Util.SCREEN_WIDTH / 2 - 120 / 2;
 		var offsetY = 150;
 
-		var tryAgainButton = new Button(offsetX, offsetY, () -> {
-			tryAgainCallback();
-			close();
-		}, "Try again");
-		add(tryAgainButton);
+		if (!win) {
+			var tryAgainButton = new Button(offsetX, offsetY, () -> {
+				tryAgainCallback();
+				close();
+			}, "Try again");
+			add(tryAgainButton);
+		}
 
 		var toMenuButton = new Button(offsetX, offsetY + 30, () -> {
 			FlxG.switchState(new LevelSelectionState());

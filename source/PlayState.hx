@@ -149,6 +149,10 @@ class PlayState extends FlxState {
 			for (b in level.members) {
 				b.tick(resourceManager.getResourcesAt(b.gridX, b.gridY));
 			}
+
+			if (level.isCompleted()) {
+				openSubState(new GameOverState(true, null, null));
+			}
 		}
 
 		if (FlxG.mouse.justPressed) {
