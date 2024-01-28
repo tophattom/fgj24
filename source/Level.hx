@@ -4,6 +4,8 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Level extends FlxTypedGroup<Block> {
+	public var name:String;
+
 	public function getRoofLayer():FlxTypedGroup<FlxSprite> {
 		var roofLayer = new FlxTypedGroup<FlxSprite>();
 

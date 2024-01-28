@@ -17,12 +17,14 @@ class LevelSelectionState extends FlxState {
 		super.create();
 
 		for (index => filename in levelFilenames) {
+			var metadata = LevelParser.parseMetadata(filename);
+
 			var button = new FlxButtonPlus(0, index * 25, () -> {
 				var state = new PlayState();
 				state.levelFilename = filename;
 
 				FlxG.switchState(state);
-			}, 'Level ${index + 1}');
+			}, 'Lvl ${index + 1}: ${metadata.name}');
 
 			add(button);
 		}

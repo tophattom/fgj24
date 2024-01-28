@@ -6,16 +6,28 @@ import openfl.utils.Assets;
 
 using StringTools;
 
+typedef LevelMetadata = {
+	?name:String
+};
+
 class LevelParser {
+	static var SKIP_PREFIXES = ["#", "name:"];
+
+	public static function parseMetadata(filename:String):LevelMetadata {
+		return parseMetadataFromData(Assets.getText(filename));
+	}
+
 	public static function load(filename:String, resourceManager:ResourceManager):Level {
 		var data = Assets.getText(filename);
+		var metadata = parseMetadataFromData(data);
 
 		var level = new Level();
+		level.name = metadata.name;
 
 		var x = 0;
 		var y = 0;
 		for (line in data.split("\n")) {
-			if (line == "" || line.startsWith("#")) {
+			if (line == "" || SKIP_PREFIXES.filter(prefix -> line.startsWith(prefix)).length > 0) {
 				continue;
 			}
 
@@ -33,6 +45,18 @@ class LevelParser {
 		}
 
 		return level;
+	}
+
+	static function parseMetadataFromData(data:String):LevelMetadata {
+		var metadata:LevelMetadata ={};
+		for (line in data.split("\n")) {
+			if (line.startsWith("name:")) {
+				metadata.name = line.split(":")[1].trim();
+				continue;
+			}
+		}
+
+		return metadata;
 	}
 
 	static function parseTile(resourceManager:ResourceManager, tile:String, gridX:Int, gridY:Int):Null<Block> {
