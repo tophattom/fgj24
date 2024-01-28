@@ -10,7 +10,9 @@ class LevelSelectionState extends FlxState {
 		AssetPaths.level_2__txt,
 		AssetPaths.level_3__txt,
 		AssetPaths.level_4__txt,
-		AssetPaths.empty_level__txt
+		AssetPaths.level_5__txt,
+		AssetPaths.level_6__txt,
+		// AssetPaths.empty_level__txt
 	];
 
 	var offsetX = Util.SCREEN_WIDTH / 2 - 120 / 2;
