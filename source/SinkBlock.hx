@@ -14,6 +14,8 @@ class SinkBlock extends Block {
 	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, requirements:Map<ResourceType, Int>, immutable:Bool = false) {
 		super(gridX, gridY, dir, immutable);
 
+		this.dir = South;
+
 		this.resourceManager = resourceManager;
 		this.requirements = requirements;
 	}
@@ -40,6 +42,10 @@ class SinkBlock extends Block {
 			animation.play("laugh");
 		}
 	}
+
+	override public function rotateCW() {}
+
+	override public function rotateCCW() {}
 
 	function setGraphic() {
 		loadGraphic(AssetPaths.sink_fat_man__png, true, 24, 24);
@@ -76,24 +82,9 @@ class SinkBlock extends Block {
 	}
 
 	function setGraphicDir(dir:Dir) {
-		switch (dir) {
-			case North:
-				animation.add("idle", [for (i in 72...80) i], Util.ANIMATION_FPS, false);
-				animation.add("laugh", [for (i in 80...88) i], Util.ANIMATION_FPS, false);
-				animation.add("cry", [for (i in 88...96) i], Util.ANIMATION_FPS, false);
-			case South:
-				animation.add("idle", [for (i in 48...56) i], Util.ANIMATION_FPS, false);
-				animation.add("laugh", [for (i in 56...64) i], Util.ANIMATION_FPS, false);
-				animation.add("cry", [for (i in 64...72) i], Util.ANIMATION_FPS, false);
-			case East:
-				animation.add("idle", [for (i in 24...32) i], Util.ANIMATION_FPS, false);
-				animation.add("laugh", [for (i in 32...40) i], Util.ANIMATION_FPS, false);
-				animation.add("cry", [for (i in 40...48) i], Util.ANIMATION_FPS, false);
-			case West:
-				animation.add("idle", [for (i in 0...8) i], Util.ANIMATION_FPS, false);
-				animation.add("laugh", [for (i in 8...16) i], Util.ANIMATION_FPS, false);
-				animation.add("cry", [for (i in 16...24) i], Util.ANIMATION_FPS, false);
-		}
+		animation.add("idle", [for (i in 0...8) i], Util.ANIMATION_FPS, false);
+		animation.add("laugh", [for (i in 8...16) i], Util.ANIMATION_FPS, false);
+		animation.add("cry", [for (i in 16...24) i], Util.ANIMATION_FPS, false);
 
 		animation.play("idle");
 	}
