@@ -26,6 +26,7 @@ class Util {
 	public static inline var FADE_DURATION = 0.33;
 	public static inline var COLOR_GOLD = 0xFFFCD800;
 	public static inline var COLOR_GOLD_DARK = 0xFFC09700;
+	public static inline var COLOR_GRAY = 0xFF2A2624;
 
 	public static function getScreenX(gridX:Int) {
 		return GRID_OFFSET_X + gridX * TILE_SIZE;

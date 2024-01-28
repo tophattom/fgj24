@@ -28,6 +28,7 @@ class PlayState extends FlxState {
 
 	var mode:Mode;
 
+	var toolbarBG:FlxSprite;
 	var toolbar:EditorToolbar;
 	var selectedBlockType:Null<BlockType> = null;
 	var blockToPlace:Null<Block> = null;
@@ -47,7 +48,10 @@ class PlayState extends FlxState {
 
 		bg = new BG();
 		backgroundGrid = new BackgroundGrid();
-		toolbar = new EditorToolbar(0, 0, toolbarBlockClickCallback);
+
+		toolbarBG = new FlxSprite(0, 0);
+		toolbarBG.makeGraphic(Util.EDITOR_TOOLBAR_WIDTH, Util.SCREEN_HEIGHT, Util.COLOR_GRAY);
+		toolbar = new EditorToolbar(0, 0, toolbarBlockClickCallback, toolBarPlayClickCallback);
 
 		resourceManager = new ResourceManager();
 
@@ -55,6 +59,7 @@ class PlayState extends FlxState {
 
 		add(bg);
 		add(backgroundGrid);
+		add(toolbarBG);
 		add(toolbar);
 		add(level);
 		add(resourceManager);
@@ -157,6 +162,10 @@ class PlayState extends FlxState {
 		} else {
 			selectBlockType(blockType);
 		}
+	}
+
+	function toolBarPlayClickCallback() {
+		switchMode();
 	}
 
 	function selectBlockType(type:Null<BlockType>, dir:Dir = North) {
