@@ -1,7 +1,13 @@
 package;
 
+import Resource.ResourceType;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
+
+typedef BlockRequirement = {
+	block:Block,
+	requirements:Map<ResourceType, Int>
+};
 
 class Level extends FlxTypedGroup<Block> {
 	public var name:String;
@@ -46,6 +52,21 @@ class Level extends FlxTypedGroup<Block> {
 		}
 
 		return true;
+	}
+
+	public function getRequirements():Array<BlockRequirement> {
+		var requirements:Array<BlockRequirement> = [];
+		for (block in members) {
+			var blockRequirements = block.getRequirements();
+			if (blockRequirements != null) {
+				requirements.push({
+					block: block,
+					requirements: blockRequirements
+				});
+			}
+		}
+
+		return requirements;
 	}
 
 	public function printData() {

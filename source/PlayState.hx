@@ -29,8 +29,9 @@ class PlayState extends FlxState {
 
 	var mode:Mode;
 
-	var toolbarBG:FlxSprite;
+	var bgFill:FlxSprite;
 	var toolbar:EditorToolbar;
+	var requirementsBar:RequirementsBar;
 	var selectedBlockType:Null<BlockType> = null;
 	var blockToPlace:Null<Block> = null;
 	var bg:BG;
@@ -47,21 +48,24 @@ class PlayState extends FlxState {
 		timeSinceLastTick = 0;
 		mode = Editor;
 
+		bgFill = new FlxSprite(0, 0);
+		bgFill.makeGraphic(Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT, Util.COLOR_GRAY);
+
 		bg = new BG();
 		backgroundGrid = new BackgroundGrid();
 
-		toolbarBG = new FlxSprite(0, 0);
-		toolbarBG.makeGraphic(Util.EDITOR_TOOLBAR_WIDTH, Util.SCREEN_HEIGHT, Util.COLOR_GRAY);
 		toolbar = new EditorToolbar(0, 0, toolbarBlockClickCallback, toolBarPlayClickCallback);
 
 		resourceManager = new ResourceManager();
 
 		level = LevelParser.load(levelFilename, resourceManager);
+		requirementsBar = new RequirementsBar(Util.SCREEN_WIDTH - Util.EDITOR_TOOLBAR_WIDTH, 0, level.getRequirements());
 
+		add(bgFill);
 		add(bg);
 		add(backgroundGrid);
-		add(toolbarBG);
 		add(toolbar);
+		add(requirementsBar);
 		add(level);
 		add(resourceManager);
 		add(level.getRoofLayer());

@@ -1,5 +1,6 @@
 package;
 
+import Resource.ResourceType;
 import flixel.FlxSprite;
 
 enum Dir {
@@ -60,6 +61,10 @@ abstract class Block extends FlxSprite {
 	abstract function setGraphicDir(dir:Dir):Void;
 
 	public function getRoofSprite():Null<FlxSprite> {
+		return null;
+	}
+
+	public function getRequirements():Null<Map<ResourceType, Int>> {
 		return null;
 	}
 

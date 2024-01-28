@@ -11,8 +11,8 @@ class Util {
 	public static inline var GRID_HEIGHT = 12;
 	public static inline var EDITOR_BUTTON_SIZE = 28;
 
-	public static inline var SCREEN_WIDTH = TILE_SIZE * GRID_WIDTH + EDITOR_TOOLBAR_WIDTH;
-	public static inline var SCREEN_HEIGHT = TILE_SIZE * GRID_WIDTH;
+	public static inline var SCREEN_WIDTH = TILE_SIZE * GRID_WIDTH + EDITOR_TOOLBAR_WIDTH * 2;
+	public static inline var SCREEN_HEIGHT = TILE_SIZE * GRID_HEIGHT;
 	public static inline var EDITOR_TOOLBAR_WIDTH = 32;
 
 	public static inline var ANIMATION_FPS = 10;

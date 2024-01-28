@@ -126,4 +126,8 @@ class SinkBlock extends Block {
 
 		return '2|${Util.dirToLevelFormat(dir)}|${reqStrParts.join("|")}';
 	}
+
+	override public function getRequirements():Map<ResourceType, Int> {
+		return requirements;
+	}
 }
