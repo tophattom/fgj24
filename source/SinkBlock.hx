@@ -47,6 +47,17 @@ class SinkBlock extends Block {
 
 	override public function rotateCCW() {}
 
+	override public function isCompleted():Bool {
+		for (resType => requiredAmount in requirements) {
+			var deliveredAmount = resourcesDelivered[resType] ?? 0;
+			if (deliveredAmount < requiredAmount) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	function setGraphic() {
 		loadGraphic(AssetPaths.sink_fat_man__png, true, 24, 24);
 		animation.add("idle", [for (i in 0...8) i], Util.ANIMATION_FPS, false);

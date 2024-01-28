@@ -38,6 +38,16 @@ class Level extends FlxTypedGroup<Block> {
 		}
 	}
 
+	public function isCompleted():Bool {
+		for (block in members) {
+			if (!block.isCompleted()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public function printData() {
 		var rows = [for (y in 0...Util.GRID_HEIGHT) y].map(y -> {
 			var row = [for (x in 0...Util.GRID_WIDTH) x].map(x -> {

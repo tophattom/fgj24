@@ -49,6 +49,10 @@ abstract class Block extends FlxSprite {
 
 	public function onClick():Void {};
 
+	public function isCompleted():Bool {
+		return true;
+	}
+
 	abstract public function tick(resources:Array<Resource>):Void;
 
 	abstract function setGraphic():Void;
