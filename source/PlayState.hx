@@ -1,6 +1,7 @@
 package;
 
 import Block.Dir;
+import GameOverSignal.FailCondition;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -66,6 +67,8 @@ class PlayState extends FlxState {
 		add(level.getRoofLayer());
 
 		level.playAnimations();
+
+		GameOverSignal.instance.add(gameOverCallback);
 	}
 
 	override public function update(elapsed:Float) {
@@ -233,5 +236,9 @@ class PlayState extends FlxState {
 
 		// Re-select the same block type so that multiples can be placed
 		selectBlockType(selectedBlockType, previousDir);
+	}
+
+	function gameOverCallback(reason:FailCondition) {
+		trace("Game over", reason);
 	}
 }

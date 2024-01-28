@@ -5,6 +5,8 @@ import Resource.ResourceType;
 import flixel.util.FlxTimer;
 
 class SinkBlock extends Block {
+	static inline var FAIL_THRESHOLD = 2;
+
 	var resourceManager:ResourceManager;
 	var animationTimer:FlxTimer;
 
@@ -27,8 +29,6 @@ class SinkBlock extends Block {
 	}
 
 	public function tick(resources:Array<Resource>) {
-		trace("consumed", resources.length, "blocks");
-
 		for (r in resources) {
 			resourcesDelivered[r.type] += 1;
 
@@ -36,7 +36,9 @@ class SinkBlock extends Block {
 			r.destroy();
 		}
 
-		trace(resourcesDelivered);
+		if (hasFailed()) {
+			GameOverSignal.instance.dispatch(WrongDeliveries);
+		}
 
 		if (resources.length > 0) {
 			animation.play("laugh");
@@ -56,6 +58,18 @@ class SinkBlock extends Block {
 		}
 
 		return true;
+	}
+
+	function hasFailed():Bool {
+		var wrongDeliveries = 0;
+
+		for (resType => deliveredAmount in resourcesDelivered) {
+			if (!requirements.exists(resType)) {
+				wrongDeliveries += deliveredAmount;
+			}
+		}
+
+		return wrongDeliveries >= FAIL_THRESHOLD;
 	}
 
 	function setGraphic() {

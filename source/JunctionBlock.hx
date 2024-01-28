@@ -12,7 +12,7 @@ class JunctionBlock extends Block {
 
 	public function tick(resources:Array<Resource>) {
 		if (resources.length > 1) {
-			trace('Too many resources on a junction block at ($gridX, $gridY)');
+			GameOverSignal.instance.dispatch(TooManyResources);
 		}
 
 		var nextDir = switch (switchPosition) {
@@ -24,7 +24,7 @@ class JunctionBlock extends Block {
 
 		for (r in resources) {
 			if (resourceCrashed(r, nextDir)) {
-				trace('resource crashed into a junction block at ($gridX, $gridY)');
+				GameOverSignal.instance.dispatch(Crash);
 			}
 
 			r.move(nextDir);

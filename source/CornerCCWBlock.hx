@@ -6,13 +6,13 @@ import flixel.util.FlxColor;
 class CornerCCWBlock extends Block {
 	public function tick(resources:Array<Resource>) {
 		if (resources.length > 1) {
-			trace('Too many resources on a ccw block at ($gridX, $gridY)');
+			GameOverSignal.instance.dispatch(TooManyResources);
 		}
 
 		var nextDir = Util.nextDirCCW(dir);
 		for (r in resources) {
 			if (resourceCrashed(r, nextDir)) {
-				trace('resource crashed into a ccw block at ($gridX, $gridY)');
+				GameOverSignal.instance.dispatch(Crash);
 			}
 
 			r.move(nextDir);
