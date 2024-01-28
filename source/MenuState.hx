@@ -22,17 +22,18 @@ class MenuState extends FlxState {
 		/* background = new FlxSprite(0, 0, AssetPaths.menu_bg__png);
 			add(background); */
 
-		title = new FlxText(0, 108, 0, 'Laughtorio');
+		title = new FlxText(0, 80, 0, 'Laughtorio');
 		title.setFormat(null, 16, Util.COLOR_GOLD, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		title.screenCenter(X);
 		add(title);
 
-		body = new FlxText(0, 168, 184, 'Somebody needs to make all the laughs in the world, and that somebody is you!');
+		body = new FlxText(0, 120, 240,
+			'Somebody needs to make all the laughs in the world, and that somebody is you!\n\nPlace block on the level to transport funnies to the people.\nYou can swicth the junction by clicking.');
 		body.setFormat(null, 8, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		body.screenCenter(X);
 		add(body);
 
-		levelSelectionButton = new Button(0, 240, transitionToLevelSelection, 'Level selection', 80);
+		levelSelectionButton = new Button(0, 240, transitionToLevelSelection, 'Level selection');
 		levelSelectionButton.screenCenter(X);
 		add(levelSelectionButton);
 

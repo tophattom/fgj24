@@ -66,6 +66,10 @@ abstract class Block extends FlxSprite {
 		return null;
 	}
 
+	public function getResourceSprites():Null<FlxSprite> {
+		return null;
+	}
+
 	public function getRequirements():Null<Map<ResourceType, Int>> {
 		return null;
 	}

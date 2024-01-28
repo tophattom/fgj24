@@ -146,4 +146,13 @@ class SourceBlock extends Block {
 		var resTypes = resourceTypePool.map(Util.resourceTypeToLevelFormat).join("|");
 		return '1|${Util.dirToLevelFormat(dir)}|$resTypes';
 	}
+
+	override public function getResourceSprites() {
+		var types:Map<ResourceType, Int> = [];
+		for (type in resourceTypePool) {
+			types[type] = 1;
+		}
+		var typesArray = [for (t in types.keys()) t];
+		return new ResourceTypeOverlay(x, y, typesArray);
+	}
 }

@@ -18,12 +18,12 @@ class SplashState extends FlxState {
 			bg.screenCenter();
 			add(bg); */
 
-		var title = new FlxText(0, 108, 0, 'Laughtorio');
+		var title = new FlxText(0, 80, 0, 'Laughtorio');
 		title.setFormat(null, 16, Util.COLOR_GOLD, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		title.screenCenter(X);
 		add(title);
 
-		var credits = new FlxText(0, 168, 184, 'Credits:\nJaakko Rinta-Filppula: Dev\nMika Kuitunen: Dev\nJoni Räsänen: Graphics');
+		var credits = new FlxText(0, 120, 184, 'Credits:\nJaakko Rinta-Filppula: Dev\nMika Kuitunen: Dev\nJoni Räsänen: Graphics');
 		credits.setFormat(null, 8, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		credits.screenCenter(X);
 		add(credits);

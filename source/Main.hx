@@ -4,7 +4,7 @@ import flixel.FlxGame;
 import openfl.display.Sprite;
 
 class Main extends Sprite {
-	var dev = true;
+	var dev = false;
 
 	public function new() {
 		super();

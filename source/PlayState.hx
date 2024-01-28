@@ -36,6 +36,7 @@ class PlayState extends FlxState {
 	var blockToPlace:Null<Block> = null;
 	var bg:BG;
 	var backgroundGrid:BackgroundGrid;
+	var resourceTypeOverlayGroup:ResourceTypeOverlayGroup;
 
 	var mouseGridX:Int = 0;
 	var mouseGridY:Int = 0;
@@ -61,6 +62,8 @@ class PlayState extends FlxState {
 		level = LevelParser.load(levelFilename, resourceManager);
 		requirementsBar = new RequirementsBar(Util.SCREEN_WIDTH - Util.EDITOR_TOOLBAR_WIDTH, 0, level.getRequirements());
 
+		resourceTypeOverlayGroup = level.getResourceTypeOverlayGroup();
+
 		add(bgFill);
 		add(bg);
 		add(backgroundGrid);
@@ -69,6 +72,7 @@ class PlayState extends FlxState {
 		add(level);
 		add(resourceManager);
 		add(level.getRoofLayer());
+		add(resourceTypeOverlayGroup);
 
 		level.playAnimations();
 
@@ -92,10 +96,12 @@ class PlayState extends FlxState {
 				updateEditorMode(elapsed);
 				backgroundGrid.visible = true;
 				toolbar.visible = true;
+				resourceTypeOverlayGroup.visible = true;
 			case Operator:
 				updateOperatorMode(elapsed);
 				backgroundGrid.visible = false;
 				toolbar.visible = false;
+				resourceTypeOverlayGroup.visible = false;
 		}
 	}
 

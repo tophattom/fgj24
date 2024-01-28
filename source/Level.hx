@@ -69,6 +69,10 @@ class Level extends FlxTypedGroup<Block> {
 		return requirements;
 	}
 
+	public function getResourceTypeOverlayGroup():ResourceTypeOverlayGroup {
+		return new ResourceTypeOverlayGroup(0, 0, members);
+	}
+
 	public function resetToInitialState() {
 		for (block in members) {
 			block.resetToInitialState();
