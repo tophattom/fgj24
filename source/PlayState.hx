@@ -90,9 +90,11 @@ class PlayState extends FlxState {
 			case Editor:
 				updateEditorMode(elapsed);
 				backgroundGrid.visible = true;
+				toolbar.visible = true;
 			case Operator:
 				updateOperatorMode(elapsed);
 				backgroundGrid.visible = false;
+				toolbar.visible = false;
 		}
 	}
 
@@ -142,7 +144,7 @@ class PlayState extends FlxState {
 			timeSinceLastTick = 0;
 
 			// TODO: Check for invalid resources (out of bounds, dropped, etc.)
-			resourceManager.reset();
+			resourceManager.resetHasMoved();
 
 			for (b in level.members) {
 				b.tick(resourceManager.getResourcesAt(b.gridX, b.gridY));
@@ -244,5 +246,16 @@ class PlayState extends FlxState {
 
 	function gameOverCallback(reason:FailCondition) {
 		trace("Game over", reason);
+
+		openSubState(new GameOverState(false, reason, tryAgain));
+	}
+
+	function tryAgain() {
+		resourceManager.resetToInitialState();
+		level.resetToInitialState();
+
+		timeSinceLastTick = 0;
+
+		mode = Editor;
 	}
 }

@@ -7,9 +7,17 @@ class ResourceManager extends FlxTypedGroup<Resource> {
 		return members.filter(res -> !res.hasMoved && res.gridX == gridX && res.gridY == gridY);
 	}
 
-	public function reset() {
+	public function resetHasMoved() {
 		for (r in members) {
 			r.hasMoved = false;
 		}
+	}
+
+	public function resetToInitialState() {
+		for (r in members) {
+			r.destroy();
+		}
+
+		clear();
 	}
 }

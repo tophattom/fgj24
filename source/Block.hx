@@ -54,6 +54,8 @@ abstract class Block extends FlxSprite {
 		return true;
 	}
 
+	public function resetToInitialState():Void {}
+
 	abstract public function tick(resources:Array<Resource>):Void;
 
 	abstract function setGraphic():Void;

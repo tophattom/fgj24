@@ -60,6 +60,12 @@ class SinkBlock extends Block {
 		return true;
 	}
 
+	override public function resetToInitialState() {
+		super.resetToInitialState();
+
+		resourcesDelivered = [];
+	}
+
 	function hasFailed():Bool {
 		var wrongDeliveries = 0;
 

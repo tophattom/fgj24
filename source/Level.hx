@@ -69,6 +69,12 @@ class Level extends FlxTypedGroup<Block> {
 		return requirements;
 	}
 
+	public function resetToInitialState() {
+		for (block in members) {
+			block.resetToInitialState();
+		}
+	}
+
 	public function printData() {
 		var rows = [for (y in 0...Util.GRID_HEIGHT) y].map(y -> {
 			var row = [for (x in 0...Util.GRID_WIDTH) x].map(x -> {

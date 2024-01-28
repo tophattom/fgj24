@@ -11,6 +11,7 @@ class SourceBlock extends Block {
 	var newResource:Resource;
 	var producingNewResource:Bool;
 
+	var initialResourceTypePool:Array<ResourceType>;
 	var resourceTypePool:Array<ResourceType>;
 
 	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, resourceTypePool:Array<ResourceType>, immutable:Bool = false) {
@@ -18,6 +19,7 @@ class SourceBlock extends Block {
 
 		this.resourceManager = resourceManager;
 		this.resourceTypePool = resourceTypePool;
+		initialResourceTypePool = resourceTypePool.copy();
 
 		newResource = null;
 		producingNewResource = false;
@@ -91,12 +93,24 @@ class SourceBlock extends Block {
 		return sprite;
 	}
 
+	override public function resetToInitialState() {
+		super.resetToInitialState();
+
+		resourceTypePool = initialResourceTypePool.copy();
+		producingNewResource = false;
+		animation.play("idle");
+	}
+
 	function produceResource() {
 		producingNewResource = true;
 		animation.play("done");
 	}
 
 	function generateNewResource():Null<Resource> {
+		if (!producingNewResource) {
+			return null;
+		}
+
 		var resourceType = resourceTypePool.shift();
 
 		return switch (resourceType) {

@@ -27,7 +27,6 @@ class EditorToolbar extends FlxTypedSpriteGroup<FlxSprite> {
 	}
 
 	function playCallback() {
-		visible = false;
 		playClickCallback();
 	}
 
