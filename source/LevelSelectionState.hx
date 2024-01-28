@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import flixel.addons.ui.FlxButtonPlus;
 
 class LevelSelectionState extends FlxState {
 	var levelFilenames = [
@@ -13,16 +12,18 @@ class LevelSelectionState extends FlxState {
 		AssetPaths.empty_level__txt
 	];
 
+	var offsetX = Util.SCREEN_WIDTH / 2 - 120 / 2;
+	var offsetY = 24;
+
 	override public function create() {
 		super.create();
 
 		for (index => filename in levelFilenames) {
 			var metadata = LevelParser.parseMetadata(filename);
 
-			var button = new FlxButtonPlus(0, index * 25, () -> {
+			var button = new Button(offsetX, offsetY + index * 24, () -> {
 				var state = new PlayState();
 				state.levelFilename = filename;
-
 				FlxG.switchState(state);
 			}, 'Lvl ${index + 1}: ${metadata.name}');
 

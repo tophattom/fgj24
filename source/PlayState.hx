@@ -28,8 +28,10 @@ class PlayState extends FlxState {
 
 	var mode:Mode;
 
+	var toolbar:EditorToolbar;
 	var selectedBlockType:Null<BlockType> = null;
 	var blockToPlace:Null<Block> = null;
+	var bg:BG;
 	var backgroundGrid:BackgroundGrid;
 
 	var mouseGridX:Int = 0;
@@ -43,14 +45,19 @@ class PlayState extends FlxState {
 		timeSinceLastTick = 0;
 		mode = Editor;
 
+		bg = new BG();
+		backgroundGrid = new BackgroundGrid();
+		toolbar = new EditorToolbar(0, 0, (block) -> {
+			trace('select block $block');
+		});
+
 		resourceManager = new ResourceManager();
 
 		level = LevelParser.load(levelFilename, resourceManager);
 
-		backgroundGrid = new BackgroundGrid();
-
-		add(new BG());
+		add(bg);
 		add(backgroundGrid);
+		add(toolbar);
 		add(level);
 		add(resourceManager);
 		add(level.getRoofLayer());
@@ -72,11 +79,9 @@ class PlayState extends FlxState {
 		switch (mode) {
 			case Editor:
 				updateEditorMode(elapsed);
-				bgColor = FlxColor.BROWN;
 				backgroundGrid.visible = true;
 			case Operator:
 				updateOperatorMode(elapsed);
-				bgColor = FlxColor.BLACK;
 				backgroundGrid.visible = false;
 		}
 	}

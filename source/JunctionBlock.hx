@@ -1,7 +1,6 @@
 package;
 
 import Block.Dir;
-import flixel.util.FlxColor;
 
 enum SwitchPosition {
 	CW;

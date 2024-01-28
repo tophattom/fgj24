@@ -2,19 +2,29 @@ package;
 
 import Block.Dir;
 import Resource.ResourceType;
+import flixel.FlxG;
+import flixel.util.FlxColor;
 
 class Util {
 	public static inline var TILE_SIZE = 24;
-	public static inline var ANIMATION_FPS = 10;
-	public static inline var ANIMATION_FPS_SLOW = 5;
-
 	public static inline var GRID_WIDTH = 12;
 	public static inline var GRID_HEIGHT = 12;
 
-	public static inline var GRID_OFFSET_X = 0;
+	public static inline var SCREEN_WIDTH = TILE_SIZE * GRID_WIDTH + EDITOR_TOOLBAR_WIDTH;
+	public static inline var SCREEN_HEIGHT = TILE_SIZE * GRID_WIDTH;
+	public static inline var EDITOR_TOOLBAR_WIDTH = 32;
+
+	public static inline var ANIMATION_FPS = 10;
+	public static inline var ANIMATION_FPS_SLOW = 5;
+
+	public static inline var GRID_OFFSET_X = EDITOR_TOOLBAR_WIDTH;
 	public static inline var GRID_OFFSET_Y = 0;
 
 	public static inline var TICK_INTERVAL = 0.5;
+
+	public static inline var FADE_DURATION = 0.33;
+	public static inline var COLOR_GOLD = 0xFFFCD800;
+	public static inline var COLOR_GOLD_DARK = 0xFFC09700;
 
 	public static function getScreenX(gridX:Int) {
 		return GRID_OFFSET_X + gridX * TILE_SIZE;
@@ -101,5 +111,13 @@ class Util {
 			case FartCushion:
 				"f";
 		}
+	}
+
+	public static function cameraFadeOut(duration:Float = FADE_DURATION, ?onComplete:() -> Void = null) {
+		FlxG.camera.fade(FlxColor.BLACK, duration, false, onComplete);
+	}
+
+	public static function cameraFadeIn(duration:Float = FADE_DURATION) {
+		FlxG.camera.fade(FlxColor.BLACK, duration, true);
 	}
 }
