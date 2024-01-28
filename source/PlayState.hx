@@ -148,7 +148,7 @@ class PlayState extends FlxState {
 		if (timeSinceLastTick >= Util.TICK_INTERVAL) {
 			timeSinceLastTick = 0;
 
-			// TODO: Check for invalid resources (out of bounds, dropped, etc.)
+			resourceManager.checkDropped(level);
 			resourceManager.resetHasMoved();
 
 			for (b in level.members) {

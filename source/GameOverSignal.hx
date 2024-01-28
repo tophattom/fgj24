@@ -4,6 +4,7 @@ import flixel.util.FlxSignal.FlxTypedSignal;
 
 enum FailCondition {
 	Crash;
+	Dropped;
 	TooManyResources;
 	WrongDeliveries;
 }

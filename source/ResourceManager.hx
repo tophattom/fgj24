@@ -20,4 +20,12 @@ class ResourceManager extends FlxTypedGroup<Resource> {
 
 		clear();
 	}
+
+	public function checkDropped(level:Level) {
+		for (r in members) {
+			if (level.getBlockAt(r.gridX, r.gridY) == null) {
+				GameOverSignal.instance.dispatch(Dropped);
+			}
+		}
+	}
 }
