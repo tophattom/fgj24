@@ -47,9 +47,7 @@ class PlayState extends FlxState {
 
 		bg = new BG();
 		backgroundGrid = new BackgroundGrid();
-		toolbar = new EditorToolbar(0, 0, (block) -> {
-			trace('select block $block');
-		});
+		toolbar = new EditorToolbar(0, 0, toolbarBlockClickCallback);
 
 		resourceManager = new ResourceManager();
 
@@ -112,7 +110,9 @@ class PlayState extends FlxState {
 			blockToPlace.gridX = Util.getBlockX(FlxG.mouse.screenX);
 			blockToPlace.gridY = Util.getBlockY(FlxG.mouse.screenY);
 
-			if (FlxG.mouse.justPressed) {
+			if (FlxG.mouse.justPressed
+				&& FlxG.mouse.x >= Util.EDITOR_TOOLBAR_WIDTH
+				&& FlxG.mouse.x <= Util.EDITOR_TOOLBAR_WIDTH + Util.GRID_WIDTH * Util.TILE_SIZE) {
 				placeSelectedBlock();
 			} else if (FlxG.mouse.justPressedMiddle || FlxG.keys.justPressed.R) {
 				blockToPlace.rotateCW();
@@ -148,6 +148,14 @@ class PlayState extends FlxState {
 			clearSelectedBlock(true);
 		} else if (mode == Operator) {
 			mode = Editor;
+		}
+	}
+
+	function toolbarBlockClickCallback(blockType:BlockType) {
+		if (selectedBlockType == blockType) {
+			selectBlockType(null);
+		} else {
+			selectBlockType(blockType);
 		}
 	}
 

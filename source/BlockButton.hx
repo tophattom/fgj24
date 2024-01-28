@@ -8,7 +8,6 @@ import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
 
 class BlockButton extends FlxTypedSpriteGroup<FlxSprite> {
-	var size = 28;
 	var blockType:BlockType;
 	var onClick:(blockType:Null<BlockType>) -> Void;
 	var pressed = false;
@@ -19,14 +18,14 @@ class BlockButton extends FlxTypedSpriteGroup<FlxSprite> {
 	public function new(X:Float, Y:Float, blockType:BlockType, onClick:(blockType:Null<BlockType>) -> Void) {
 		super(X, Y);
 
-		width = size;
-		height = size;
+		width = Util.EDITOR_BUTTON_SIZE;
+		height = Util.EDITOR_BUTTON_SIZE;
 
 		this.blockType = blockType;
 		this.onClick = onClick;
 
 		bg = new FlxSprite(0, 0);
-		bg.loadGraphic(AssetPaths.block_button_bg__png, true, size, size);
+		bg.loadGraphic(AssetPaths.block_button_bg__png, true, Util.EDITOR_BUTTON_SIZE, Util.EDITOR_BUTTON_SIZE);
 		bg.animation.add("default", [0]);
 		bg.animation.add("hover", [1]);
 		bg.animation.add("pressed", [2]);
@@ -57,10 +56,6 @@ class BlockButton extends FlxTypedSpriteGroup<FlxSprite> {
 	override public function destroy() {
 		FlxMouseEvent.remove(this);
 		super.destroy();
-	}
-
-	public function toggleBlockVisibility(visibility:Bool) {
-		block.visible = visibility;
 	}
 
 	function onMouseDown(object:BlockButton) {
