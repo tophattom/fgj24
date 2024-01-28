@@ -81,10 +81,11 @@ class PlayState extends FlxState {
 		mouseGridX = Util.getBlockX(FlxG.mouse.screenX);
 		mouseGridY = Util.getBlockY(FlxG.mouse.screenY);
 
-		// FIXME: This is only for development purposes
+		#if DEV_EDITOR
 		if (FlxG.keys.justPressed.M) {
 			switchMode();
 		}
+		#end
 
 		switch (mode) {
 			case Editor:
@@ -101,24 +102,28 @@ class PlayState extends FlxState {
 	function updateEditorMode(elapsed:Float) {
 		// FIXME: This is only for development purposes
 		if (FlxG.keys.justPressed.ONE) {
-			selectBlockType(Source);
-		} else if (FlxG.keys.justPressed.TWO) {
-			selectBlockType(Sink);
-		} else if (FlxG.keys.justPressed.THREE) {
 			selectBlockType(Straight);
-		} else if (FlxG.keys.justPressed.FOUR) {
+		} else if (FlxG.keys.justPressed.TWO) {
 			selectBlockType(CornerCW);
-		} else if (FlxG.keys.justPressed.FIVE) {
+		} else if (FlxG.keys.justPressed.THREE) {
 			selectBlockType(CornerCCW);
-		} else if (FlxG.keys.justPressed.SIX) {
+		} else if (FlxG.keys.justPressed.FOUR) {
 			selectBlockType(Junction);
 		} else if (FlxG.keys.justPressed.ESCAPE) {
 			selectBlockType(null);
 		}
 
+		#if DEV_EDITOR
+		if (FlxG.keys.justPressed.FIVE) {
+			selectBlockType(Source);
+		} else if (FlxG.keys.justPressed.SIX) {
+			selectBlockType(Sink);
+		}
+
 		if (FlxG.keys.justPressed.P) {
 			level.printData();
 		}
+		#end
 
 		if (blockToPlace != null) {
 			blockToPlace.gridX = Util.getBlockX(FlxG.mouse.screenX);
