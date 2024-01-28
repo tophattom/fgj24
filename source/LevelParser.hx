@@ -76,6 +76,7 @@ class LevelParser {
 
 				return new SourceBlock(gridX, gridY, dir, resourceManager, typePool, true);
 			case "2": // SinkBlock
+				var spriteIndex = Std.parseInt(parts.shift());
 				var requirements:Map<ResourceType, Int> = [];
 				while (parts.length > 0) {
 					var resType = parseResourceType(parts.shift());
@@ -84,7 +85,7 @@ class LevelParser {
 					requirements.set(resType, amount);
 				}
 
-				return new SinkBlock(gridX, gridY, dir, resourceManager, 1, requirements, true);
+				return new SinkBlock(gridX, gridY, dir, resourceManager, spriteIndex, requirements, true);
 			case "3": // StraightBlock
 				return new StraightBlock(gridX, gridY, dir, true);
 			case "4": // CornerCWBlock
