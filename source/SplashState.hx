@@ -14,9 +14,8 @@ class SplashState extends FlxState {
 	override function create() {
 		super.create();
 
-		/* var bg = new FlxSprite(0, 0, AssetPaths.menu_bg__png);
-			bg.screenCenter();
-			add(bg); */
+		var bg = new FlxSprite(0, 0, AssetPaths.menu_bg__png);
+		add(bg);
 
 		var title = new FlxText(0, 80, 0, 'Laughtorio');
 		title.setFormat(null, 16, Util.COLOR_GOLD, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

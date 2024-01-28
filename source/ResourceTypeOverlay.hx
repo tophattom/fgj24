@@ -18,6 +18,8 @@ class ResourceTypeOverlay extends FlxTypedSpriteGroup<FlxSprite> {
 					sprite.loadGraphic(AssetPaths.clown_horn__png, false, 24, 24);
 				case FartCushion:
 					sprite.loadGraphic(AssetPaths.fart_cushion__png, false, 24, 24);
+				case FlagGun:
+					sprite.loadGraphic(AssetPaths.flag_gun__png, false, 24, 24);
 			}
 
 			add(sprite);

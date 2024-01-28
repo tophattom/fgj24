@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 
 class LevelSelectionState extends FlxState {
@@ -17,6 +18,9 @@ class LevelSelectionState extends FlxState {
 
 	override public function create() {
 		super.create();
+
+		var bg = new FlxSprite(0, 0, AssetPaths.menu_bg__png);
+		add(bg);
 
 		for (index => filename in levelFilenames) {
 			var metadata = LevelParser.parseMetadata(filename);
