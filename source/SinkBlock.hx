@@ -6,14 +6,22 @@ import flixel.util.FlxTimer;
 
 class SinkBlock extends Block {
 	static inline var FAIL_THRESHOLD = 2;
+	static var spritePaths = [
+		AssetPaths.sink_fat_man__png,
+		AssetPaths.sink_baby__png,
+		AssetPaths.sink_strict_lady__png
+	];
 
 	var resourceManager:ResourceManager;
 	var animationTimer:FlxTimer;
+	var spriteIndex:Int;
 
 	var requirements:Map<ResourceType, Int>;
 	var resourcesDelivered:Map<ResourceType, Int> = [];
 
-	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, requirements:Map<ResourceType, Int>, immutable:Bool = false) {
+	override public function new(gridX:Int, gridY:Int, dir:Dir, resourceManager:ResourceManager, spriteIndex:Int, requirements:Map<ResourceType, Int>,
+			immutable:Bool = false) {
+		this.spriteIndex = spriteIndex;
 		super(gridX, gridY, dir, immutable);
 
 		this.dir = South;
@@ -79,7 +87,8 @@ class SinkBlock extends Block {
 	}
 
 	function setGraphic() {
-		loadGraphic(AssetPaths.sink_fat_man__png, true, 24, 24);
+		var assetPath = if (spriteIndex != null && spriteIndex < spritePaths.length) spritePaths[spriteIndex] else spritePaths[0];
+		loadGraphic(assetPath, true, 24, 24);
 		animation.add("idle", [for (i in 0...8) i], Util.ANIMATION_FPS, false);
 		animation.add("laugh", [for (i in 8...16) i], Util.ANIMATION_FPS, false);
 		animation.add("cry", [for (i in 16...24) i], Util.ANIMATION_FPS, false);

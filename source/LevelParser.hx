@@ -84,7 +84,7 @@ class LevelParser {
 					requirements.set(resType, amount);
 				}
 
-				return new SinkBlock(gridX, gridY, dir, resourceManager, requirements, true);
+				return new SinkBlock(gridX, gridY, dir, resourceManager, 1, requirements, true);
 			case "3": // StraightBlock
 				return new StraightBlock(gridX, gridY, dir, true);
 			case "4": // CornerCWBlock
