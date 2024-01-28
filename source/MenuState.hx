@@ -28,7 +28,7 @@ class MenuState extends FlxState {
 		add(title);
 
 		body = new FlxText(0, 120, 240,
-			'Somebody needs to make all the laughs in the world, and that somebody is you!\n\nPlace block on the level to transport funnies to the people, then press play.\nYou can also use number keys to select blocks\nYou can switch the junction by clicking.');
+			'Somebody needs to make all the laughs in the world, and that somebody is you!\n\nPlace block on the level to transport funnies to the people, then press play.\n\n Use R to rotate a block X to remove a block while hovering over it.\nYou can also use numbers 1-4 to select blocks.\nYou can switch the junction by clicking.');
 		body.setFormat(null, 8, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		body.screenCenter(X);
 		add(body);
