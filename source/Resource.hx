@@ -8,6 +8,7 @@ import flixel.util.FlxColor;
 enum ResourceType {
 	Horn;
 	FartCushion;
+	FlagGun;
 }
 
 abstract class Resource extends FlxSprite {

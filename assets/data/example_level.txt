@@ -1,5 +1,5 @@
 # dir: n|e|s|w
-# res: h|f
+# res: h|f|g
 
 # empty: 0
 # source: 1|dir|res|res|res...

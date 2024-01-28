@@ -112,6 +112,8 @@ class Util {
 				"h";
 			case FartCushion:
 				"f";
+			case FlagGun:
+				"g";
 		}
 	}
 

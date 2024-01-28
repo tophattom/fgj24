@@ -118,6 +118,8 @@ class SourceBlock extends Block {
 				new FartCushionResource(gridX, gridY);
 			case Horn:
 				new HornResource(gridX, gridY);
+			case FlagGun:
+				new FlagGunResource(gridX, gridY);
 			case null:
 				null;
 		}

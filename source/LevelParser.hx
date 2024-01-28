@@ -120,6 +120,8 @@ class LevelParser {
 				return Horn;
 			case "f":
 				return FartCushion;
+			case "g":
+				return FlagGun;
 			default:
 				throw 'Invalid resource type $resTypeStr';
 		}

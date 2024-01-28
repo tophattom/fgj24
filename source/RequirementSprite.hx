@@ -26,6 +26,8 @@ class RequirementSprite extends FlxTypedSpriteGroup<FlxSprite> {
 					rSprite.loadGraphic(AssetPaths.clown_horn__png, false, 24, 24);
 				case FartCushion:
 					rSprite.loadGraphic(AssetPaths.fart_cushion__png, false, 24, 24);
+				case FlagGun:
+					rSprite.loadGraphic(AssetPaths.flag_gun__png, false, 24, 24);
 			}
 			add(rSprite);
 			i++;
